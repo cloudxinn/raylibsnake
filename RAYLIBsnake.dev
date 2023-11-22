@@ -1,0 +1,265 @@
+[Project]
+filename = RAYLIBsnake.dev
+name = RAYLIBsnake
+UnitCount = 15
+Type = 0
+Ver = 3
+Includes = 
+Libs = 
+Bins = 
+ResourceIncludes = 
+MakeIncludes = 
+PrivateResource = 
+Compiler = 
+CppCompiler = 
+Linker = -lraylib -lopengl32 -lgdi32 -lwinmm
+ResourceCommand = 
+IsCpp = 1
+Icon = 
+ExeOutput = 
+ObjectOutput = 
+LogOutput = 
+LogOutputEnabled = 0
+OverrideOutput = 0
+OverrideOutputName = 
+HostApplication = 
+UseCustomMakefile = 0
+CustomMakefile = 
+UsePrecompiledHeader = 0
+PrecompiledHeader = 
+CommandLine = 
+Folders = 
+IncludeVersionInfo = 0
+SupportXPThemes = 0
+CompilerSet = 3
+StaticLink = 0
+AddCharset = 1
+ExecEncoding = UTF-8
+Encoding = UTF-8
+ModelType = 0
+ClassBrowserType = 0
+AllowParallelBuilding = false
+ParellelBuildingJobs = 0
+UseUTF8 = 1
+
+
+[Unit1]
+FileName = config.cpp
+CompileCpp = 1
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+
+
+[VersionInfo]
+Major = 1
+Minor = 0
+Release = 0
+Build = 0
+LanguageID = 7177
+CharsetID = 1252
+CompanyName = 
+FileVersion = 0.1
+FileDescription = Developed using the Red Panda C++ IDE
+InternalName = 
+LegalCopyright = 
+LegalTrademarks = 
+OriginalFilename = RAYLIBsnake.exe
+ProductName = RAYLIBsnake
+ProductVersion = 0.1.1.1
+AutoIncBuildNr = 0
+SyncProduct = 1
+
+
+[Unit2]
+FileName = main.cpp
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 1
+
+
+[Unit3]
+FileName = res/apple.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 1
+
+
+[Unit4]
+FileName = end_game.cpp
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 1
+
+
+[Unit5]
+FileName = res/snake_head.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 1
+
+
+[Unit6]
+FileName = font.cpp
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 1
+
+
+[Unit7]
+FileName = res/wall.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 1
+
+
+[Unit8]
+FileName = res/tittle.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 0
+
+
+[Unit9]
+FileName = in_game.cpp
+CompileCpp = 1
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+
+
+[Unit10]
+FileName = res/bg.png
+CompileCpp = 1
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+
+
+[Unit11]
+FileName = res/snake_body.png
+CompileCpp = 1
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+
+
+[Unit12]
+FileName = global_var.h
+CompileCpp = 0
+Folder = 头文件
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+
+
+[Unit13]
+FileName = res/play.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 1
+
+
+[Unit14]
+FileName = begin_game.cpp
+CompileCpp = 1
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+
+
+[Unit15]
+FileName = structs.h
+Folder = 头文件
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 0
+
+
+[CompilerSettings]
+cc_cmd_opt_debug_info = on
+cc_cmd_opt_std = 
+cc_cmd_opt_use_pipe = on
+cc_cmd_opt_warning_all = on
