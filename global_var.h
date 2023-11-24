@@ -9,6 +9,7 @@ extern std::vector<_snake> snake;
 extern std::vector<_snake> snake_Old;
 extern std::vector<position> wall[4];
 extern std::vector<position> obstacle;
+extern std::vector<_apple> apple;
 extern bool gameover;
 extern int snake_length;
 extern const int u;
@@ -16,7 +17,7 @@ extern const int p;
 extern int score;
 extern int width;
 extern int length;
-
+extern int obstacle_num;
 extern double level;
 extern bool firststart;
 extern clock_t now;

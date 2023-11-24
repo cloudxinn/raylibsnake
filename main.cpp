@@ -10,47 +10,49 @@
 const int u = 40;
 const int p = 120;
 static bool gamestart = false;
-std::vector<position> obstacle;
-int width = 15, length =15;
+static bool mapset = false;
+static bool configset = false;
+static bool mapset_create = false;
+static bool configset_create = false;
 double level = 1.0/10;
 using namespace std; 
 Vector2 mouse;//TODO unused??
 int main()
 {
-	ifstream map("maps/default.map",ios::in);
-	ifstream config("config/default.config",ios::in);
-	//open file
-	//TODO NEED function to check if input valid
-	if(!map) return 1;
 	InitWindow(1600, 1200, "SNAKE"); 
-	int wall_status[4]={1};
-	int obstacle_num = 0;
-	//mute value
-	map >> width >> length
-		>> wall_status[0] >> wall_status[1]
-		>> wall_status[2] >> wall_status[3]
-		>> obstacle_num;
-	for(int i=0;i<obstacle_num;i++)
-	{
-		position ob;
-		map >> ob.x >> ob.y;
-		obstacle.push_back(ob);
-	}
-	map.close();
 	begin_game(width+2,length+2);
 	SetTargetFPS(60);
 	Image bg = LoadImage("res/tittle.png");
 	Texture tbg = LoadTextureFromImage(bg);
-	setfont("res/font.ttf",200);
+	setfont("res/font.ttf",50);
 	while(!gamestart)
 	{
 		
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 		DrawTexture(tbg,0,0,WHITE);
-		gamestart = GuiButton((Rectangle){ 368, 792, 736, 195 }, "开始游戏"); 
+		gamestart = GuiButton((Rectangle){ 360, 700, 720, 100 }, "开始游戏"); 
+		mapset = GuiButton((Rectangle){ 360, 850, 300, 100 }, "地图"); 
+		configset = GuiButton((Rectangle){ 360, 1000, 300, 100 }, "配置"); 
+		mapset_create = GuiButton((Rectangle){ 800, 850, 280, 100 }, "创建地图"); 
+		configset_create = GuiButton((Rectangle){ 800, 1000, 280, 100 }, "创建配置"); 
 		EndDrawing();
-		
+		if(mapset)
+		{
+			setmap();
+		}
+		if(configset)
+		{
+			setconfig();
+		}
+		if(mapset_create)
+		{
+			create_map();
+		}
+		if(configset_create)
+		{
+			create_config();
+		}
 		if(WindowShouldClose())
 		{
 			return 0;
@@ -74,8 +76,6 @@ int main()
 			EndDrawing();
 		}
 	}
-	//end_game();
-	config.close();
-	//TODO use costom config
+	//end_game()
 	return 0;
 }
