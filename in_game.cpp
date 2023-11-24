@@ -10,16 +10,15 @@
 void update(void);
 void draw_game(void);
 void pause_game(void);
-bool check_apple(void);
+bool check_apple(_apple apple);
 position rand_position(int seed);
 using std::chrono::steady_clock;
 std::vector<_snake> snake_Old;
-static position apple=(position){15,15};
-static bool Is_apple_eat = 0;
 static bool pause = false; 
 static std::chrono::steady_clock::time_point timeold;
 int score=0;
 clock_t now; 
+
 void in_game()
 {	
 	timeold = std::chrono::steady_clock::now();
@@ -61,12 +60,14 @@ void in_game()
 			snake_Old.push_back(snake[i]);
 		}
 		//control
-		
-		if((snake[0].x < apple.x +0.5 && (snake[0].x > apple.x-0.5) &&
-			(snake[0].y < (apple.y+0.5) && (snake[0].y) > apple.y+-0.5)))
+		for(unsigned i=0;i<apple.size();i++)
 		{
-			Is_apple_eat = 1;
+		if((snake[0].x < apple[i].x +0.5 && (snake[0].x > apple[i].x-0.5) &&
+			(snake[0].y < (apple[i].y+0.5) && (snake[0].y) > apple[i].y-0.5)))
+		{
+			apple[i].ate = true;
 			snake.push_back(snake_Old.back());
+		}
 		}
 		//apple collision
 		
@@ -155,10 +156,11 @@ void draw_game()
 			{
 				DrawTexture(tbody ,p+snake[i].x*u, p+snake[i].y*u, WHITE);
 			}//Draw sanke
-			
-			DrawTexture(tapple, p+apple.x*u, p+apple.y*u, WHITE);
+			for (auto applef : apple)
+			{
+			DrawTexture(tapple, p+applef.x*u, p+applef.y*u, WHITE);
 			//draw apple
-			
+			}
 			for(unsigned i = 0; i < obstacle.size(); i++)
 			{
 				DrawTexture(twall ,p+obstacle[i].x*u, p+obstacle[i].y*u, WHITE);
@@ -190,6 +192,7 @@ void draw_game()
 	*/
 	return;
 }
+
 void update(void)
 {
 	switch(snake[0].direct)
@@ -212,18 +215,23 @@ void update(void)
 		snake[i]=snake_Old[i-1];
 	}
 	//snake position update
-	score+=1;
-	if(Is_apple_eat) 
+	//score+=1;
+	for(unsigned i=0;i<apple.size();i++)
+	{
+	if(apple[i].ate) 
 	{
 		while(1)
 		{
-			apple=rand_position(time(NULL));
-			if(check_apple()) break;
+			position temp = rand_position(time(NULL));
+			apple[i].x=temp.x;
+			apple[i].y=temp.y;
+			if(check_apple(apple[i])) break;
 		}
-		Is_apple_eat = 0;
+		apple[i].ate = false;
 		score+=3;
 	}
 	//apple update
+	}
 	return;
 }
 
@@ -250,7 +258,7 @@ void pause_game(void)
 	return;
 }
 
-bool check_apple(void)
+bool check_apple(_apple apple)
 {
 	for (auto i : snake)
 	{

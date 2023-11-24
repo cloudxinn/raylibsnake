@@ -7,6 +7,10 @@ void in_game(void);
 void end_game(void);
 void draw_game(void);
 void setfont(const char *fileName, int fontSize);
+bool setmap(void);
+bool setconfig(void);
+bool create_config(void);
+bool create_map(void);
 struct position{
 	int x;
 	int y;
@@ -15,6 +19,12 @@ struct _snake{
 	int x;
 	int y;
 	int direct;
+};
+struct _apple{
+	int x;
+	int y;
+	int type;
+	bool ate = false;
 };
 //0-Right
 //1-Left
