@@ -22,6 +22,11 @@ extern double level;
 extern bool firststart;
 extern clock_t now;
 
+extern double speed;
+extern int seed;
+extern int fruit_num;
+extern int furit_pro[3];
+
 extern char guitests[50];
 extern int codepointsCount;
 extern int *codepoints;
