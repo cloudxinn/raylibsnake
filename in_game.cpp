@@ -66,6 +66,7 @@ void in_game()
 			(snake[0].y < (apple[i].y+0.5) && (snake[0].y) > apple[i].y-0.5)))
 		{
 			apple[i].ate = true;
+			snake.push_back(snake_Old.back());
 		}
 		}
 		//apple collision
@@ -209,18 +210,11 @@ void update(void)
 		snake[0].y-=1;
 		break;
 	}
-
-	//snake position update
-	for(auto i : apple)
+	for(unsigned int i = 1; i < snake.size(); i++)
 	{
-		if(i.ate) 
-		{
-		snake.push_back(snake_Old.back());
-		i.ate=false;
-			break;
-		}
+		snake[i]=snake_Old[i-1];
 	}
-	//snkae grow
+	//snake position update
 	//score+=1;
 	for(unsigned i=0;i<apple.size();i++)
 	{
@@ -236,13 +230,8 @@ void update(void)
 		apple[i].ate = false;
 		score+=3;
 	}
-	for(unsigned int i = 1; i < snake.size(); i++)
-	{
-			snake[i]=snake_Old[i-1];
-	}
 	//apple update
 	}
-	
 	return;
 }
 

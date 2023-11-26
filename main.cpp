@@ -14,12 +14,13 @@ static bool mapset = false;
 static bool configset = false;
 static bool mapset_create = false;
 static bool configset_create = false;
-double level = 1.0/speed;
+double level = 1.0/10;
 using namespace std; 
 Vector2 mouse;//TODO unused??
 int main()
 {
 	InitWindow(1600, 1200, "SNAKE"); 
+	begin_game(width+2,length+2);
 	SetTargetFPS(60);
 	Image bg = LoadImage("res/tittle.png");
 	Texture tbg = LoadTextureFromImage(bg);
@@ -59,12 +60,11 @@ int main()
 	}
 	UnloadImage(bg);
 	UnloadTexture(tbg);
-	begin_game(width+2,length+2);
 	while(!WindowShouldClose())
 	{
 		if(!gameover)
 		{
-		in_game();	
+		in_game();
 		draw_game();
 		}
 		else
