@@ -4,8 +4,11 @@
 #include"raygui.h"
 #include<fstream>
 #include<iostream>
+#include<cmath>
+#include<vector>
 using std::ifstream;
 using std::ios;
+using std::vector;
 int width = 15, length =15;
 int wall_status[4]={1};
 int obstacle_num = 0;
@@ -14,6 +17,7 @@ int seed=-1;
 int fruit_num = 1;
 int furit_pro[3] = {6,3,1}; //10points express probability
 void DrawStyleEditControls(void);
+vector<vector<bool>> gameboard;
 bool setmap(void)
 {
 	bool exit = false;
@@ -55,7 +59,6 @@ bool setconfig(void)
 	std::cout << configlist.size()<<std::endl;
 	bool lastpage=false;
 	bool nextpage=false;
-	unsigned display_num = 0;
 	unsigned next_num = 0;
 	while(!exit)
 	{	
@@ -64,7 +67,6 @@ bool setconfig(void)
 		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
 		lastpage =  GuiButton((Rectangle){ 1240, 320, 320, 120}, "上一页")||WindowShouldClose();
 		nextpage =  GuiButton((Rectangle){ 1240, 520, 320, 120}, "下一页")||WindowShouldClose();
-		display_num = 0;
 		for(unsigned i=0;i<configlist.size();i++)
 		{
 			con[i]=false;
@@ -123,13 +125,64 @@ bool create_config(void)
 bool create_map(void)
 {
 	bool exit = false;
+	int _width = 15;
+	int _length = 15;
+	Vector2 mouse; 
+	Image imgwall = LoadImage("res/wall.png");
+	Texture twall = LoadTextureFromImage(imgwall);
 	while(!exit)
 	{	
+		mouse = GetMousePosition();
 		BeginDrawing();
 		ClearBackground(WHITE);
-		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
+		exit =  GuiButton((Rectangle){ 1160, 960, 360, 160}, "返回")||WindowShouldClose(); 
+		DrawTextEx(font,"地图大小：",(Vector2){1040,120},80,5,BLACK);
+		int _newlength = GuiSliderBar((Rectangle){ 1160, 200, 400, 120 },"横：",TextFormat("%i", (int)_length), _length, 8, 20);
+		int _newwidth = GuiSliderBar((Rectangle){ 1160, 360, 400, 120 },"纵：",TextFormat("%i", (int)_width), _width, 8, 20);
+		for(int i = 0; i < _length+1; i++)
+		{
+			DrawTexture(twall ,p+i*u, p, WHITE);
+			DrawTexture(twall ,p+i*u, p+(_width+1)*u, WHITE);
+		}
+		for(int i = 0; i < _width+2; i++)
+		{
+			DrawTexture(twall ,p, p+i*u, WHITE);
+			DrawTexture(twall ,p+(_length+1)*u, p+i*u, WHITE);
+		}
+		if(_newlength!=_length||_newwidth!=_width)
+		{
+			for(int i=0;i<width;i++)
+			{
+				vector<bool> s;
+				for(int j=0;j<length;j++)
+				{
+					s.push_back(false);
+				}
+				gameboard.push_back(s);
+			}
+		}
+		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+		{
+			int y = floor(mouse.y/50);
+			int x = floor(mouse.x/50);
+			if (y >= 0 && y < length
+				&& x >=0 && x < width ) 
+			{
+				if(gameboard[x][y]) gameboard[x][y]=false;
+				else gameboard[x][y]=true;
+			}
+		}
+		for(int i=0;i<width;i++)
+		{
+			for(int j=0;j<length;j++)
+			{
+				if(gameboard[i][j]) DrawTexture(twall,p+i*u,p+j*u,WHITE);
+			}
+		}
 		EndDrawing();
 	}
+	UnloadImage(imgwall);
+	UnloadTexture(twall);
 	return true;
 }
 
