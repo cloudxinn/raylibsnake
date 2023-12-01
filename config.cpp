@@ -76,16 +76,26 @@ bool setconfig(void)
 		if(nextpage)
 		{
 			next_num+=5;
-			std::cout << next_num<<std::endl;
+			if(next_num>=configlist.size()) next_num-=5;
+		}
+		if(lastpage&&next_num>=5)
+		{
+			next_num-=5;
 		}
 		for(unsigned i=0;i<configlist.size();i++)
 		{
-			if(con[i]) configlist.push_back(configlist[i]);
+			if(con[i]) 
+			{
+				configlist.push_back(configlist[i]);
+				exit=true;
+				break;
+			}
 		}
 	EndDrawing();
 	}
-	
-	ifstream _config("config/default.config",ios::in);
+	std::string _filestring="config/";
+	_filestring+=configlist.back();
+	ifstream _config(_filestring.c_str(),ios::in);
 	if(!_config) return false;
 	_config >> speed >> seed >> fruit_num;
 	furit_pro[0]=_config.get()*10;
@@ -93,6 +103,7 @@ bool setconfig(void)
 	furit_pro[2]=_config.get()*10;
 	_config.close();
 	_configlist.close();
+	std::cout <<  speed << seed << fruit_num;
 	return true;
 }
 
@@ -106,6 +117,7 @@ bool create_config(void)
 		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
 		EndDrawing();
 	}
+	return true;
 }
 
 bool create_map(void)
@@ -118,6 +130,6 @@ bool create_map(void)
 		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
 		EndDrawing();
 	}
-	
+	return true;
 }
 
