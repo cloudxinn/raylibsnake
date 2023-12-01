@@ -44,7 +44,7 @@ UseUTF8 = 1
 
 
 [Unit1]
-FileName = res/snake_head.png
+FileName = res/apple.png
 CompileCpp = 1
 Folder = 其他文件/res
 Compile = 0
@@ -77,19 +77,6 @@ SyncProduct = 1
 
 
 [Unit2]
-FileName = begin_game.cpp
-Folder = 源文件
-Compile = 1
-Link = 1
-Priority = 1000
-OverrideBuildCmd = 0
-BuildCmd = 
-FileEncoding = PROJECT
-RealEncoding = UTF-8
-CompileCpp = 1
-
-
-[Unit3]
 FileName = in_game.cpp
 Folder = 源文件
 Compile = 1
@@ -102,20 +89,7 @@ RealEncoding = UTF-8
 CompileCpp = 1
 
 
-[Unit4]
-FileName = res/tittle.png
-Folder = 其他文件/res
-Compile = 0
-Link = 0
-Priority = 1000
-OverrideBuildCmd = 0
-BuildCmd = 
-FileEncoding = PROJECT
-RealEncoding = ASCII
-CompileCpp = 1
-
-
-[Unit5]
+[Unit3]
 FileName = end_game.cpp
 Folder = 源文件
 Compile = 1
@@ -128,8 +102,8 @@ RealEncoding = UTF-8
 CompileCpp = 1
 
 
-[Unit6]
-FileName = res/apple.png
+[Unit4]
+FileName = res/snake_body.png
 Folder = 其他文件/res
 Compile = 0
 Link = 0
@@ -141,8 +115,34 @@ RealEncoding = ASCII
 CompileCpp = 1
 
 
+[Unit5]
+FileName = res/wall.png
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+CompileCpp = 1
+
+
+[Unit6]
+FileName = begin_game.cpp
+Folder = 源文件
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 1
+
+
 [Unit7]
-FileName = font.cpp
+FileName = config.cpp
 Folder = 源文件
 Compile = 1
 Link = 1
@@ -155,7 +155,21 @@ CompileCpp = 1
 
 
 [Unit8]
-FileName = res/wall.png
+FileName = structs.h
+Folder = 头文件
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 0
+
+
+[Unit9]
+FileName = res/snake_head.png
+CompileCpp = 1
 Folder = 其他文件/res
 Compile = 0
 Link = 0
@@ -164,10 +178,9 @@ OverrideBuildCmd = 0
 BuildCmd = 
 FileEncoding = PROJECT
 RealEncoding = ASCII
-CompileCpp = 0
 
 
-[Unit9]
+[Unit10]
 FileName = main.cpp
 CompileCpp = 1
 Folder = 源文件
@@ -180,21 +193,8 @@ FileEncoding = PROJECT
 RealEncoding = UTF-8
 
 
-[Unit10]
-FileName = global_var.h
-CompileCpp = 0
-Folder = 头文件
-Compile = 0
-Link = 0
-Priority = 1000
-OverrideBuildCmd = 0
-BuildCmd = 
-FileEncoding = PROJECT
-RealEncoding = UTF-8
-
-
 [Unit11]
-FileName = config.cpp
+FileName = font.cpp
 CompileCpp = 1
 Folder = 源文件
 Compile = 1
@@ -207,7 +207,7 @@ RealEncoding = UTF-8
 
 
 [Unit12]
-FileName = res/snake_body.png
+FileName = res/tittle.png
 CompileCpp = 1
 Folder = 其他文件/res
 Compile = 0
@@ -220,7 +220,7 @@ RealEncoding = ASCII
 
 
 [Unit13]
-FileName = structs.h
+FileName = global_var.h
 Folder = 头文件
 Compile = 0
 Link = 0
@@ -228,7 +228,7 @@ Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
 FileEncoding = PROJECT
-RealEncoding = UTF-8
+RealEncoding = ASCII
 CompileCpp = 0
 
 
