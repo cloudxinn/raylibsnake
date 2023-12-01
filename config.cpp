@@ -9,6 +9,8 @@
 using std::ifstream;
 using std::ios;
 using std::vector;
+using std::cout;
+using std::endl;
 int width = 15, length =15;
 int wall_status[4]={1};
 int obstacle_num = 0;
@@ -130,6 +132,15 @@ bool create_map(void)
 	Vector2 mouse; 
 	Image imgwall = LoadImage("res/wall.png");
 	Texture twall = LoadTextureFromImage(imgwall);
+	for(int i=0;i<_width;i++)
+	{
+		vector<bool> s;
+		for(int j=0;j<_length;j++)
+		{
+			s.push_back(false);
+		}
+		gameboard.push_back(s);
+	}
 	while(!exit)
 	{	
 		mouse = GetMousePosition();
@@ -151,32 +162,48 @@ bool create_map(void)
 		}
 		if(_newlength!=_length||_newwidth!=_width)
 		{
-			for(int i=0;i<width;i++)
+			gameboard.clear();
+			//if(gameboard.empty()) cout << gameboard.empty();
+			for(int i=0;i<_newwidth;i++)
 			{
 				vector<bool> s;
-				for(int j=0;j<length;j++)
+				for(int j=0;j<_newlength;j++)
 				{
 					s.push_back(false);
 				}
 				gameboard.push_back(s);
 			}
+			_length=_newlength;
+			_width=_newwidth;
 		}
-		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+	    
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		{
-			int y = floor(mouse.y/50);
-			int x = floor(mouse.x/50);
-			if (y >= 0 && y < length
-				&& x >=0 && x < width ) 
+			int y = floor((mouse.y-160)/40);
+			int x = floor((mouse.x-160)/40);
+			cout << "x:"<<x << " " <<"y:"<< y << endl;
+			if (y >= 0 && y < _length
+				&& x >=0 && x < _width ) 
 			{
 				if(gameboard[x][y]) gameboard[x][y]=false;
 				else gameboard[x][y]=true;
+				for(auto i:gameboard)
+				{
+					for(auto j:i)
+					{
+						cout << j << " ";
+					}
+					cout << endl;
+				}
+				cout << _width << " " << _length <<endl;
 			}
 		}
-		for(int i=0;i<width;i++)
+		DrawText(TextFormat("Mouse Position: [ %.0f, %.0f ]", mouse.x, mouse.y), 10, 10, 50, DARKGRAY);
+		for(int i=0;i<_width;i++)
 		{
-			for(int j=0;j<length;j++)
+			for(int j=0;j<_length;j++)
 			{
-				if(gameboard[i][j]) DrawTexture(twall,p+i*u,p+j*u,WHITE);
+				if(gameboard[i][j]) DrawTexture(twall,p+(i+1)*u,p+(j+1)*u,WHITE);
 			}
 		}
 		EndDrawing();
