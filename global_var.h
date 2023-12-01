@@ -27,7 +27,7 @@ extern int seed;
 extern int fruit_num;
 extern int furit_pro[3];
 
-extern char guitests[50];
+extern char guitests[1000];
 extern int codepointsCount;
 extern int *codepoints;
 extern Font font;
