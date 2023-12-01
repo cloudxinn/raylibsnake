@@ -3,6 +3,7 @@
 #include"global_var.h"
 #include"raygui.h"
 #include<fstream>
+#include<iostream>
 using std::ifstream;
 using std::ios;
 int width = 15, length =15;
@@ -12,8 +13,17 @@ double speed = 10;
 int seed=-1;
 int fruit_num = 1;
 int furit_pro[3] = {6,3,1}; //10points express probability
+void DrawStyleEditControls(void);
 bool setmap(void)
 {
+	bool exit = false;
+	while(!exit)
+	{	
+		BeginDrawing();
+		ClearBackground(WHITE);
+		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
+		EndDrawing();
+	}
 	ifstream map("maps/default.map",ios::in);
 	if(!map) return false;
 	map >> width >> length
@@ -32,28 +42,82 @@ bool setmap(void)
 bool setconfig(void)
 {
 	bool exit = false;
+	ifstream _configlist("res/configs.list",ios::in);
+	std::vector<std::string> configlist;
+	while(_configlist)
+	{
+		std::string temp;
+		_configlist >> temp;
+		configlist.push_back(temp);
+	}
+	configlist.pop_back();
+	bool con[configlist.size()]={false};
+	std::cout << configlist.size()<<std::endl;
+	bool lastpage=false;
+	bool nextpage=false;
+	unsigned display_num = 0;
+	unsigned next_num = 0;
 	while(!exit)
 	{	
 	BeginDrawing();
 	ClearBackground(WHITE);
-		exit =  GuiButton((Rectangle){ 520, 680, 1240, 880 }, "返回"); 
+		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
+		lastpage =  GuiButton((Rectangle){ 1240, 320, 320, 120}, "上一页")||WindowShouldClose();
+		nextpage =  GuiButton((Rectangle){ 1240, 520, 320, 120}, "下一页")||WindowShouldClose();
+		display_num = 0;
+		for(unsigned i=0;i<configlist.size();i++)
+		{
+			con[i]=false;
+		}
+		for(unsigned i=next_num;i<next_num+5&&i<configlist.size();i++)
+		{
+			con[i] = GuiButton((Rectangle){ 240, (float)200+(i-next_num)*120, 880, 120}, configlist[i].c_str());
+		}
+		if(nextpage)
+		{
+			next_num+=5;
+			std::cout << next_num<<std::endl;
+		}
+		for(unsigned i=0;i<configlist.size();i++)
+		{
+			if(con[i]) configlist.push_back(configlist[i]);
+		}
 	EndDrawing();
 	}
-	ifstream config("config/default.config",ios::in);
-	if(!config) return false;
-	config >> speed >> seed >> fruit_num;
-	furit_pro[0]=config.get()*10;
-	furit_pro[1]=config.get()*10;
-	furit_pro[2]=config.get()*10;
-	config.close();
+	
+	ifstream _config("config/default.config",ios::in);
+	if(!_config) return false;
+	_config >> speed >> seed >> fruit_num;
+	furit_pro[0]=_config.get()*10;
+	furit_pro[1]=_config.get()*10;
+	furit_pro[2]=_config.get()*10;
+	_config.close();
+	_configlist.close();
 	return true;
 }
 
 bool create_config(void)
 {
+	bool exit = false;
+	while(!exit)
+	{	
+		BeginDrawing();
+		ClearBackground(WHITE);
+		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
+		EndDrawing();
+	}
 }
 
 bool create_map(void)
 {
+	bool exit = false;
+	while(!exit)
+	{	
+		BeginDrawing();
+		ClearBackground(WHITE);
+		exit =  GuiButton((Rectangle){ 800, 920, 680, 80}, "返回")||WindowShouldClose(); 
+		EndDrawing();
+	}
 	
 }
+
