@@ -26,7 +26,6 @@ int main()
 	setfont("res/font.ttf",50);
 	while(!gamestart)
 	{
-		
 		BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); 
 		DrawTexture(tbg,0,0,WHITE);
@@ -76,6 +75,7 @@ int main()
 			EndDrawing();
 		}
 	}
+	UnloadFont(font);
 	//end_game()
 	return 0;
 }
