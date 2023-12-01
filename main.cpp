@@ -64,7 +64,7 @@ int main()
 	{
 		if(!gameover)
 		{
-		in_game();
+		in_game();	
 		draw_game();
 		}
 		else
