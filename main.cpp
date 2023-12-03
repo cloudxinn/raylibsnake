@@ -15,7 +15,7 @@ static bool mapset = false;
 static bool configset = false; 
 static bool mapset_create = false;   
 static bool configset_create = false; 
-double level = 1.0 / speed;          // 游戏速度
+double level = 2.2 / speed;          // 游戏速度
 
 using namespace std; 
 Vector2 mouse;       
