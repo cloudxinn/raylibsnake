@@ -90,14 +90,7 @@ void in_game()
 		
 		// 处理蛇自身碰撞
 		
-		if (((snake[0].x) > width) ||
-			((snake[0].y) > length) ||
-			(snake[0].x < 0) || (snake[0].y < 0))
-		{
-			gameover = true;
-		}
 		
-		// 处理蛇与边界碰撞
 		
 		if (obstacle.size())
 		{
@@ -245,6 +238,30 @@ void update(void)
 		snake[0].y -= 1;
 		break;
 	}
+	
+	if (snake[0].x > width  )
+	{
+		
+		snake[0].x = snake[0].x - width;
+	}
+	if (snake[0].x <1)
+	{
+		
+		snake[0].x = snake[0].x +width;
+	}
+	
+	// 如果蛇头超出屏幕宽度范围，将蛇头移到另一侧
+	if (snake[0].y > length )
+	{
+		
+		snake[0].y = snake[0].y - length;
+	}
+	if (snake[0].y <1)
+	{
+		
+		snake[0].y = snake[0].y + length;
+	}
+	// 如果蛇头超出屏幕高度范围，将蛇头移到另一侧
 	
 	// 更新蛇头位置
 	
