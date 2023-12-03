@@ -148,18 +148,19 @@ bool create_map(void)
 		ClearBackground(WHITE);
 		exit =  GuiButton((Rectangle){ 1160, 960, 360, 160}, "返回")||WindowShouldClose(); 
 		DrawTextEx(font,"地图大小：",(Vector2){1040,120},80,5,BLACK);
-		int _newlength = GuiSliderBar((Rectangle){ 1160, 200, 400, 120 },"横：",TextFormat("%i", (int)_length), _length, 8, 20);
-		int _newwidth = GuiSliderBar((Rectangle){ 1160, 360, 400, 120 },"纵：",TextFormat("%i", (int)_width), _width, 8, 20);
-		for(int i = 0; i < _length+1; i++)
+		int _newwidth = GuiSliderBar((Rectangle){ 1160, 200, 400, 120 },"横：",TextFormat("%i", (int)_width), _width, 8, 20);
+		int _newlength = GuiSliderBar((Rectangle){ 1160, 360, 400, 120 },"纵：",TextFormat("%i", (int)_length), _length, 8, 20);
+		for(int i = 0; i < _width+1; i++)
 		{
 			DrawTexture(twall ,p+i*u, p, WHITE);
-			DrawTexture(twall ,p+i*u, p+(_width+1)*u, WHITE);
+			DrawTexture(twall ,p+i*u, p+(_length+1)*u, WHITE);
 		}
-		for(int i = 0; i < _width+2; i++)
+		for(int i = 0; i < _length+2; i++)
 		{
 			DrawTexture(twall ,p, p+i*u, WHITE);
-			DrawTexture(twall ,p+(_length+1)*u, p+i*u, WHITE);
+			DrawTexture(twall ,p+(_width+1)*u, p+i*u, WHITE);
 		}
+		
 		if(_newlength!=_length||_newwidth!=_width)
 		{
 			gameboard.clear();
@@ -172,6 +173,7 @@ bool create_map(void)
 					s.push_back(false);
 				}
 				gameboard.push_back(s);
+				s.clear();
 			}
 			_length=_newlength;
 			_width=_newwidth;
@@ -179,9 +181,10 @@ bool create_map(void)
 	    
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		{
-			int y = floor((mouse.y-160)/40);
 			int x = floor((mouse.x-160)/40);
+			int y = floor((mouse.y-160)/40);
 			cout << "x:"<<x << " " <<"y:"<< y << endl;
+			cout << "_width:"<< _width << " " <<"_length:"<< _length << endl;
 			if (y >= 0 && y < _length
 				&& x >=0 && x < _width ) 
 			{
