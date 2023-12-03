@@ -6,11 +6,16 @@
 #include<iostream>
 #include<cmath>
 #include<vector>
+#include<array>
+#include<string>
+using std::ofstream;
 using std::ifstream;
 using std::ios;
 using std::vector;
+using std::array;
 using std::cout;
 using std::endl;
+using std::string;
 int width = 15, length =15;
 int wall_status[4]={1};
 int obstacle_num = 0;
@@ -18,8 +23,15 @@ double speed = 10;
 int seed=-1;
 int fruit_num = 1;
 int furit_pro[3] = {6,3,1}; //10points express probability
+char mapname[256]="new.map";
+string mapnamestring;
+bool maptextBoxEditMode=false;
+char configname[256]="new.config";
+string confignamestring;
+bool configtextBoxEditMode=false;
 void DrawStyleEditControls(void);
 vector<vector<bool>> gameboard;
+array<bool,4> wallstatue; 
 bool setmap(void)
 {
 	bool exit = false;
@@ -127,6 +139,7 @@ bool create_config(void)
 bool create_map(void)
 {
 	bool exit = false;
+	bool save = false;
 	int _width = 15;
 	int _length = 15;
 	Vector2 mouse; 
@@ -147,9 +160,12 @@ bool create_map(void)
 		BeginDrawing();
 		ClearBackground(WHITE);
 		exit =  GuiButton((Rectangle){ 1160, 960, 360, 160}, "返回")||WindowShouldClose(); 
+		save =  GuiButton((Rectangle){ 1160, 760, 360, 160}, "保存")||WindowShouldClose(); 
 		DrawTextEx(font,"地图大小：",(Vector2){1040,120},80,5,BLACK);
 		int _newwidth = GuiSliderBar((Rectangle){ 1160, 200, 400, 120 },"横：",TextFormat("%i", (int)_width), _width, 8, 20);
 		int _newlength = GuiSliderBar((Rectangle){ 1160, 360, 400, 120 },"纵：",TextFormat("%i", (int)_length), _length, 8, 20);
+		if (GuiTextBox((Rectangle){ 1040, 520, 520, 120 }, mapname, 120, maptextBoxEditMode)) maptextBoxEditMode = !maptextBoxEditMode;
+		mapnamestring = mapname;
 		for(int i = 0; i < _width+1; i++)
 		{
 			DrawTexture(twall ,p+i*u, p, WHITE);
@@ -160,7 +176,6 @@ bool create_map(void)
 			DrawTexture(twall ,p, p+i*u, WHITE);
 			DrawTexture(twall ,p+(_width+1)*u, p+i*u, WHITE);
 		}
-		
 		if(_newlength!=_length||_newwidth!=_width)
 		{
 			gameboard.clear();
@@ -178,7 +193,6 @@ bool create_map(void)
 			_length=_newlength;
 			_width=_newwidth;
 		}
-	    
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		{
 			int x = floor((mouse.x-160)/40);
@@ -210,6 +224,37 @@ bool create_map(void)
 			}
 		}
 		EndDrawing();
+		
+		if(save)
+		{
+			mapnamestring="maps/"+mapnamestring;
+			std::ofstream outmap(mapnamestring.c_str(),ios::out);
+			outmap << _width << " " << _length << endl;
+			for(auto out : wallstatue)
+			{
+				outmap << out << " ";
+			}
+			int count=0;
+			for(unsigned i=0;i<gameboard.size();i++)
+			{
+				for(unsigned j=0;j<gameboard[i].size();j++)
+				{
+					if(gameboard[i][j]) count++;
+				}
+			}
+			outmap << endl << count<<endl;
+			for(unsigned i=0;i<gameboard.size();i++)
+			{
+				for(unsigned j=0;j<gameboard[i].size();j++)
+				{
+					if(gameboard[i][j]) outmap<< i << " "<<j<<endl;
+				}
+			}
+			outmap.close();
+			UnloadImage(imgwall);
+			UnloadTexture(twall);
+			return true;
+		}
 	}
 	UnloadImage(imgwall);
 	UnloadTexture(twall);
