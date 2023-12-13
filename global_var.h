@@ -9,6 +9,7 @@ extern std::vector<_snake> snake;
 extern std::vector<_snake> snake_Old;
 extern std::vector<position> wall[4];
 extern std::vector<position> obstacle;
+extern std::vector<position> obstacletemp;
 extern std::vector<_apple> apple;
 extern bool gameover;
 extern int snake_length;

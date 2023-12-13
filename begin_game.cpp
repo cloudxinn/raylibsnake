@@ -20,8 +20,7 @@ void begin_game(int m, int n)
 	wall[0].clear(); 
 	wall[1].clear(); 
 	wall[2].clear(); 
-	wall[3].clear(); 
-	obstacle.clear(); 
+	wall[3].clear();  
 	apple.clear(); 
 	
 	for (int i = 0; i < 4; i++)
@@ -41,8 +40,8 @@ void begin_game(int m, int n)
 		wall[3].push_back({(position){m - 1, i}}); 
 	} // 初始化左右墙壁
 	
+	obstacle=obstacletemp;
 	snake_length = snake.size(); // 获取蛇的初始长度
-	apple.push_back({7, 7, 0, false}); // 初始化一个苹果的位置
-	
+	apple.push_back({3, 2, 0, false}); // 初始化一个苹果的位置
 	return;
 }

@@ -26,6 +26,7 @@ double speed = 10;
 int seed = -1;
 int fruit_num = 1;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
+std::vector<position> obstacletemp;
 char mapname[256] = "new.map";
 string mapnamestring;
 bool maptextBoxEditMode = false;
@@ -50,35 +51,94 @@ bool setmap(void)
 {
 	bool exit = false;
 	
-	// 显示地图设置界面
+	
+	ifstream _maplist("res/maps.list", ios::in);
+	std::vector<std::string> maplist;
+	while (_maplist)
+	{
+		std::string temp;
+		_maplist >> temp;
+		maplist.push_back(temp);
+	}
+	maplist.pop_back();
+	bool con[maplist.size()] = {false};
+	
+	bool lastpage = false;
+	bool nextpage = false;
+	unsigned next_num = 0;
+	
+	// 显示配置地图界面
 	while (!exit)
 	{
 		BeginDrawing();
 		ClearBackground(WHITE);
 		
-		// 返回按钮
+		// 返回
 		exit = GuiButton((Rectangle){800, 920, 680, 80}, "返回") || WindowShouldClose();
+		
+		// 上一页
+		lastpage = GuiButton((Rectangle){1240, 320, 320, 120}, "上一页") || WindowShouldClose();
+		
+		// 下一页
+		nextpage = GuiButton((Rectangle){1240, 520, 320, 120}, "下一页") || WindowShouldClose();
+		
+		// 绘制列表
+		for (unsigned i = 0; i < maplist.size(); i++)
+		{
+			con[i] = false;
+		}
+		
+		for (unsigned i = next_num; i < next_num + 5 && i < maplist.size(); i++)
+		{
+			con[i] = GuiButton((Rectangle){240, (float)200 + (i - next_num) * 120, 880, 120}, maplist[i].c_str());
+		}
+		
+		// 翻页
+		if (nextpage)
+		{
+			next_num += 5;
+			if (next_num >= maplist.size())
+				next_num -= 5;
+		}
+		
+		if (lastpage && next_num >= 5)
+		{
+			next_num -= 5;
+		}
+		
+		// 选中地图项
+		for (unsigned i = 0; i < maplist.size(); i++)
+		{
+			if (con[i])
+			{
+				maplist.push_back(maplist[i]);
+				exit = true;
+				break;
+			}
+		}
 		
 		EndDrawing();
 	}
 	
+	std::string _filestring = "maps/";
+	_filestring += maplist.back();
+	ifstream _map(_filestring.c_str(), ios::in);
 	// 读取地图文件
-	ifstream map("maps/default.map", ios::in);
-	if (!map)
+	if (!_map)
 		return false;
 	
 	// 读取地图信息
-	map >> width >> length >> wall_status[0] >> wall_status[1] >> wall_status[2] >> wall_status[3] >> obstacle_num;
-	
+	_map >> width >> length >> wall_status[0] >> wall_status[1] >> wall_status[2] >> wall_status[3] >> obstacle_num;
+	obstacletemp.clear();
 	// 读取障碍物位置
 	for (int i = 0; i < obstacle_num; i++)
 	{
 		position ob;
-		map >> ob.x >> ob.y;
-		obstacle.push_back(ob);
+		_map >> ob.x >> ob.y;
+		obstacletemp.push_back(ob);
 	}
 	
-	map.close();
+	_map.close();
 	return true;
 }
 
@@ -181,20 +241,60 @@ bool setconfig(void)
 bool create_config(void)
 {
 	bool exit = false;
+	bool save = false;
+	int _level=1;
+	int _seed;
+	int _applenum=1;
+	double _applepro[3]{};
 	
-	// 显示创建配置文件界面
+	// 显示地图界面
 	while (!exit)
 	{
 		BeginDrawing();
 		ClearBackground(WHITE);
 		
-		// 返回按钮
-		exit = GuiButton((Rectangle){800, 920, 680, 80}, "返回") || WindowShouldClose();
+		// 返回
+		exit = GuiButton((Rectangle){1160, 960, 360, 160}, "返回") || WindowShouldClose();
+		
+		// 保存
+		save = GuiButton((Rectangle){1160, 760, 360, 160}, "保存") || WindowShouldClose();
+		
+		// 绘制界面
+		DrawTextEx(font, "地图大小：", (Vector2){1040, 120}, 80, 5, BLACK);
+		int _newlevel = GuiSliderBar((Rectangle){1160, 200, 400, 120}, "难度：", TextFormat("%i", (int)_level), _level, 1, 10);
+		int _newapplenum = GuiSliderBar((Rectangle){1160, 360, 400, 120}, "食物数量：", TextFormat("%i", (int)_applenum), _applenum, 1, 5);
+		
+		if (GuiTextBox((Rectangle){1040, 520, 520, 120}, configname, 120, maptextBoxEditMode))
+			maptextBoxEditMode = !maptextBoxEditMode;
+		
+		confignamestring = configname;
+		
+
+		if (_newlevel != _level || _newapplenum != _applenum)
+		{
+			_level = _newlevel;
+			_applenum = _newapplenum;
+		}
+		
 		
 		EndDrawing();
+		
+		// 保存
+		if (save)
+		{
+			std::ofstream configmenu("res/config.list", ios::app);
+			configmenu << endl <<confignamestring;
+			confignamestring = "config/" + confignamestring;
+			std::ofstream outconfig(confignamestring.c_str(), ios::out);
+			outconfig << _level << endl
+			<< _seed << endl
+			<< _applenum << endl
+			<< _applepro[0] << " " << _applepro[1] << " " << _applepro[2]; 
+			configmenu.close();
+			outconfig.close();
+			return true;
+}
 	}
-	
-	return true;
 }
 
 // 创建地图
@@ -305,6 +405,8 @@ bool create_map(void)
 		// 保存
 		if (save)
 		{
+			std::ofstream mapmenu("res/maps.list", ios::app);
+			mapmenu << endl <<mapnamestring;
 			mapnamestring = "maps/" + mapnamestring;
 			std::ofstream outmap(mapnamestring.c_str(), ios::out);
 			outmap << _width << " " << _length << endl;
@@ -338,7 +440,7 @@ bool create_map(void)
 						outmap << i << " " << j << endl;
 				}
 			}
-			
+			mapmenu.close();
 			outmap.close();
 			UnloadImage(imgwall);
 			UnloadTexture(twall);

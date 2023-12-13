@@ -79,6 +79,7 @@ int main()
 	UnloadTexture(tbg);
 	
 	begin_game(width + 2, length + 2); // 游戏初始化
+	cout << width << endl << length;
 	
 	// 主循环
 	while (!WindowShouldClose())
