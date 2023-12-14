@@ -1,13 +1,13 @@
 [
     {
-        "caretX": 108,
-        "caretY": 11,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/font.cpp",
+        "caretX": 5,
+        "caretY": 285,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/config.cpp",
         "focused": false,
         "isOpen": true,
         "leftChar": 1,
-        "order": 1,
-        "topLine": 1
+        "order": 0,
+        "topLine": 71
     },
     {
         "caretX": 34,
@@ -27,21 +27,21 @@
         "isOpen": true,
         "leftChar": 1,
         "order": 2,
-        "topLine": 16
+        "topLine": 1
     },
     {
-        "caretX": 101,
-        "caretY": 264,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/config.cpp",
+        "caretX": 106,
+        "caretY": 11,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/font.cpp",
         "focused": true,
         "isOpen": true,
         "leftChar": 1,
-        "order": 0,
-        "topLine": 70
+        "order": 1,
+        "topLine": 1
     },
     {
-        "caretX": 43,
-        "caretY": 12,
+        "caretX": 17,
+        "caretY": 30,
         "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/global_var.h",
         "focused": false,
         "isOpen": true,

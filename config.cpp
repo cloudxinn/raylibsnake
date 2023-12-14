@@ -23,6 +23,7 @@ int width = 15, length = 15;
 int wall_status[4] = {1};
 int obstacle_num = 0;
 double speed = 10;
+char _seed[50] = "-1";
 int seed = -1;
 int fruit_num = 1;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
@@ -30,6 +31,12 @@ std::vector<position> obstacletemp;
 char mapname[256] = "new.map";
 string mapnamestring;
 bool maptextBoxEditMode = false;
+bool maptextBox0EditMode = false;
+bool maptextBox1EditMode = false;
+bool maptextBox2EditMode = false;
+bool maptextBox3EditMode = false;
+bool maptextBox4EditMode = false;
+
 char configname[256] = "new.config";
 string confignamestring;
 bool configtextBoxEditMode = false;
@@ -243,30 +250,39 @@ bool create_config(void)
 	bool exit = false;
 	bool save = false;
 	int _level=1;
-	int _seed;
 	int _applenum=1;
-	double _applepro[3]{};
+	char _applepro[3][50]{"0.1","0.3","0.6"};
 	
-	// 显示地图界面
+	
 	while (!exit)
 	{
 		BeginDrawing();
 		ClearBackground(WHITE);
 		
 		// 返回
-		exit = GuiButton((Rectangle){1160, 960, 360, 160}, "返回") || WindowShouldClose();
+		exit = GuiButton((Rectangle){960, 1000, 360, 160}, "返回") || WindowShouldClose();
 		
 		// 保存
-		save = GuiButton((Rectangle){1160, 760, 360, 160}, "保存") || WindowShouldClose();
+		save = GuiButton((Rectangle){240, 1000, 360, 160}, "保存") || WindowShouldClose();
 		
 		// 绘制界面
-		DrawTextEx(font, "地图大小：", (Vector2){1040, 120}, 80, 5, BLACK);
-		int _newlevel = GuiSliderBar((Rectangle){1160, 200, 400, 120}, "难度：", TextFormat("%i", (int)_level), _level, 1, 10);
-		int _newapplenum = GuiSliderBar((Rectangle){1160, 360, 400, 120}, "食物数量：", TextFormat("%i", (int)_applenum), _applenum, 1, 5);
+		int _newlevel = GuiSliderBar((Rectangle){240, 160, 880, 120}, "难度：", TextFormat("%i", (int)_level), _level, 1, 10);
+		int _newapplenum = GuiSliderBar((Rectangle){240, 320, 880, 120}, "食物数量：", TextFormat("%i", (int)_applenum), _applenum, 1, 5);
 		
-		if (GuiTextBox((Rectangle){1040, 520, 520, 120}, configname, 120, maptextBoxEditMode))
-			maptextBoxEditMode = !maptextBoxEditMode;
+		if (GuiTextBox((Rectangle){240, 800, 880, 120}, configname, 120, maptextBox0EditMode))
+			maptextBox0EditMode = !maptextBox0EditMode;
+		if (GuiTextBox((Rectangle){240, 480, 880, 120}, _seed, 120, maptextBox1EditMode))
+			maptextBox1EditMode = !maptextBox1EditMode;
+		if (GuiTextBox((Rectangle){240, 640, 240, 120}, _applepro[0], 120, maptextBox2EditMode))
+			maptextBox2EditMode = !maptextBox2EditMode;
+		if (GuiTextBox((Rectangle){600, 640, 240, 120}, _applepro[1], 120, maptextBox3EditMode))
+			maptextBox3EditMode = !maptextBox3EditMode;
+		if (GuiTextBox((Rectangle){960, 640, 240, 120}, _applepro[2], 120, maptextBox4EditMode))
+			maptextBox4EditMode = !maptextBox4EditMode;
 		
+		DrawTextEx(font, "食物生成概率", (Vector2){0, 640}, 40, 5, BLACK);
+		DrawTextEx(font, "种子", (Vector2){0, 480}, 80, 5, BLACK);
+		//DrawTextEx(font, "配置名称", (Vector2){0, 800}, 80, 5, BLACK);
 		confignamestring = configname;
 		
 

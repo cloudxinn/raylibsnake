@@ -24,9 +24,10 @@ extern bool firststart;
 extern clock_t now;
 
 extern double speed;
-extern int seed;
+extern char _seed[50];
 extern int fruit_num;
 extern int furit_pro[3];
+extern int seed;
 
 extern char guitests[1000];
 extern int codepointsCount;
