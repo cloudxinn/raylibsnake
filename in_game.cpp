@@ -239,29 +239,33 @@ void update(void)
 		break;
 	}
 	
-	if (snake[0].x > width  )
+	if (snake[0].x > width )
 	{
-		
-		snake[0].x = snake[0].x - width;
+		if(!wallstatue[3])
+			snake[0].x = snake[0].x - width;
+		else gameover = true;
 	}
-	if (snake[0].x <1)
+	if (snake[0].x <1 )
 	{
-		
-		snake[0].x = snake[0].x +width;
+		if(!wallstatue[2])
+			snake[0].x = snake[0].x +width;
+		else gameover = true;
 	}
+	// 如果蛇头超出屏幕宽度范围，（虚墙）将蛇头移到另一侧（实墙）游戏结束
 	
-	// 如果蛇头超出屏幕宽度范围，将蛇头移到另一侧
 	if (snake[0].y > length )
 	{
-		
-		snake[0].y = snake[0].y - length;
+		if(!wallstatue[0])
+			snake[0].y = snake[0].y - length;
+		else gameover = true;
 	}
-	if (snake[0].y <1)
+	if (snake[0].y <1 )
 	{
-		
-		snake[0].y = snake[0].y + length;
+		if(!wallstatue[1]) 
+			snake[0].y = snake[0].y + length;
+		else gameover = true;
 	}
-	// 如果蛇头超出屏幕高度范围，将蛇头移到另一侧
+	// 如果蛇头超出屏幕高度范围，（虚墙）将蛇头移到另一侧（实墙）游戏结束
 	
 	// 更新蛇头位置
 	

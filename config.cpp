@@ -20,7 +20,6 @@ using std::string;
 
 // 变量初始化
 int width = 15, length = 15;
-int wall_status[4] = {1};
 int obstacle_num = 0;
 double speed = 10;
 char _seed[50] = "-1";
@@ -43,6 +42,8 @@ bool configtextBoxEditMode = false;
 
 // 游戏板和墙壁状态
 vector<vector<bool>> gameboard;
+
+//墙壁状态储存数组
 array<bool,4> wallstatue;
 
 
@@ -135,7 +136,7 @@ bool setmap(void)
 		return false;
 	
 	// 读取地图信息
-	_map >> width >> length >> wall_status[0] >> wall_status[1] >> wall_status[2] >> wall_status[3] >> obstacle_num;
+	_map >> width >> length >> wallstatue[0] >> wallstatue[1] >> wallstatue[2] >> wallstatue[3] >> obstacle_num;
 	obstacletemp.clear();
 	// 读取障碍物位置
 	for (int i = 0; i < obstacle_num; i++)
@@ -153,7 +154,6 @@ bool setmap(void)
 bool setconfig(void)
 {
 	bool exit = false;
-	
 
 	ifstream _configlist("res/configs.list", ios::in);
 	std::vector<std::string> configlist;

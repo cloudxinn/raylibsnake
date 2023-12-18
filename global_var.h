@@ -1,6 +1,7 @@
 #ifndef GLOBAL_VAR_H
 #define GLOBAL_VAR_H
 #include<vector>
+#include<array>
 #include<chrono>
 #include"structs.h"
 #include"raylib.h"
@@ -11,6 +12,7 @@ extern std::vector<position> wall[4];
 extern std::vector<position> obstacle;
 extern std::vector<position> obstacletemp;
 extern std::vector<_apple> apple;
+extern std::array<bool,4> wallstatue;
 extern bool gameover;
 extern int snake_length;
 extern const int u;
