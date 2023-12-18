@@ -43,7 +43,7 @@ bool configtextBoxEditMode = false;
 
 // 游戏板和墙壁状态
 vector<vector<bool>> gameboard;
-array<bool, 4> wallstatue;
+array<bool,4> wallstatue;
 
 
 void DrawStyleEditControls(void);
@@ -320,6 +320,8 @@ bool create_map(void)
 	bool save = false;
 	int _width = 15;
 	int _length = 15;
+	wallstatue.fill(true);
+	
 	Vector2 mouse;
 	Image imgwall = LoadImage("res/wall.png");
 	Texture twall = LoadTextureFromImage(imgwall);
@@ -350,8 +352,15 @@ bool create_map(void)
 		
 		// 绘制界面
 		DrawTextEx(font, "地图大小：", (Vector2){1040, 120}, 80, 5, BLACK);
+		DrawTextEx(font, "墙虚实：", (Vector2){0, 1000}, 80, 5, BLACK);
 		int _newwidth = GuiSliderBar((Rectangle){1160, 200, 400, 120}, "横：", TextFormat("%i", (int)_width), _width, 8, 20);
 		int _newlength = GuiSliderBar((Rectangle){1160, 360, 400, 120}, "纵：", TextFormat("%i", (int)_length), _length, 8, 20);
+		
+		//绘制勾选框（墙壁虚实）
+		wallstatue[0] = GuiCheckBox((Rectangle){ 120, 1080, 100, 100 }, "上", wallstatue[0]);
+		wallstatue[1] = GuiCheckBox((Rectangle){ 320, 1080, 100, 100 }, "下", wallstatue[1]);
+		wallstatue[2] = GuiCheckBox((Rectangle){ 520, 1080, 100, 100 }, "左", wallstatue[2]);
+		wallstatue[3] = GuiCheckBox((Rectangle){ 720, 1080, 100, 100 }, "右", wallstatue[3]);
 		
 		if (GuiTextBox((Rectangle){1040, 520, 520, 120}, mapname, 120, maptextBoxEditMode))
 			maptextBoxEditMode = !maptextBoxEditMode;
