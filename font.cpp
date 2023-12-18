@@ -1,6 +1,6 @@
-#include"raylib.h"
-#include"structs.h"
-#include"global_var.h"
+#include "raylib.h"
+#include "structs.h"
+#include "global_var.h"
 #include "raygui.h"
 char guitests[1000];
 int codepointsCount;

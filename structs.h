@@ -1,7 +1,7 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 #include "raylib.h"
-#include<vector>
+#include <vector>
 void begin_game(int m, int n);
 void in_game(void);
 void end_game(void);

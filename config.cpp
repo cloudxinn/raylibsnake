@@ -8,6 +8,7 @@
 #include <vector>
 #include <array>
 #include <string>
+#include <cstring>
 
 using std::ofstream;
 using std::ifstream;
@@ -129,6 +130,7 @@ bool setmap(void)
 	}
 	
 	std::string _filestring = "maps/";
+	strcpy(mapname,maplist.back().c_str());
 	_filestring += maplist.back();
 	ifstream _map(_filestring.c_str(), ios::in);
 	// 读取地图文件
@@ -225,6 +227,7 @@ bool setconfig(void)
 	
 	// 构造配置文件
 	std::string _filestring = "config/";
+	strcpy(configname,configlist.back().c_str());
 	_filestring += configlist.back();
 	ifstream _config(_filestring.c_str(), ios::in);
 	
@@ -298,7 +301,7 @@ bool create_config(void)
 		// 保存
 		if (save)
 		{
-			std::ofstream configmenu("res/config.list", ios::app);
+			std::ofstream configmenu("res/configs.list", ios::app);
 			configmenu << endl <<confignamestring;
 			confignamestring = "config/" + confignamestring;
 			std::ofstream outconfig(confignamestring.c_str(), ios::out);

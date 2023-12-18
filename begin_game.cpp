@@ -1,6 +1,7 @@
 #include "structs.h" 
 #include "raylib.h" 
 #include <vector> 
+#include <cstdlib>
 #include "global_var.h" 
 #include "raygui.h" 
 
@@ -22,7 +23,7 @@ void begin_game(int m, int n)
 	wall[2].clear(); 
 	wall[3].clear();  
 	apple.clear(); 
-	
+	score=0;
 	for (int i = 0; i < 4; i++)
 	{
 		snake.push_back({(_snake){width / 2 - i, length / 2, 0}}); // 初始化蛇的位置
@@ -43,5 +44,10 @@ void begin_game(int m, int n)
 	obstacle=obstacletemp;
 	snake_length = snake.size(); // 获取蛇的初始长度
 	apple.push_back({3, 2, 0, false}); // 初始化一个苹果的位置
+	
+	//设定速度
+	level = 1.0 / speed;
+	srand((seed==-1?time(NULL):seed));
+	
 	return;
 }

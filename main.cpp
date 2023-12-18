@@ -97,7 +97,8 @@ int main()
 			
 			DrawText("score:", 560, 280, 120, BLACK);            
 			DrawText(std::to_string(score).c_str(), 600, 520, 160, BLACK); // 绘制得分
-			
+			gameover = !GuiButton((Rectangle){520, 760, 560, 200}, "Once Again");
+			if(!gameover) begin_game(width + 2, length + 2);
 			EndDrawing(); // 结束绘制
 		}
 	}

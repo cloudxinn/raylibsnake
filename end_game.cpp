@@ -1,7 +1,7 @@
 #include "structs.h"
-#include"global_var.h"
-#include<string>
-#include<cstdio>
+#include "global_var.h"
+#include <string>
+#include <cstdio>
 void end_game()
 {
 	// 绘制画面

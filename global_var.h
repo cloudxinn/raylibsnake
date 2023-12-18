@@ -1,10 +1,11 @@
 #ifndef GLOBAL_VAR_H
 #define GLOBAL_VAR_H
-#include<vector>
-#include<array>
-#include<chrono>
-#include"structs.h"
-#include"raylib.h"
+#include <vector>
+#include <array>
+#include <chrono>
+#include <string>
+#include "structs.h"
+#include "raylib.h"
 
 extern std::vector<_snake> snake;
 extern std::vector<_snake> snake_Old;
@@ -24,6 +25,8 @@ extern int obstacle_num;
 extern double level;
 extern bool firststart;
 extern clock_t now;
+extern char mapname[256];
+extern char configname[256];
 
 extern double speed;
 extern char _seed[50];

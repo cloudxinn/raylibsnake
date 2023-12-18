@@ -25,7 +25,6 @@ clock_t now; // 当前时钟时间
 void in_game()
 {	
 	timeold = std::chrono::steady_clock::now();
-	std::srand(time(NULL));
 	
 	if (!gameover)
 	{
@@ -191,9 +190,9 @@ void draw_game()
 		// 绘制障碍物
 		
 		DrawText("config:", 1120, 120, 50, BLACK);
-		DrawText(" default.config", 1120, 200, 50, BLACK);
+		DrawText(configname, 1120, 200, 50, BLACK);
 		DrawText("map:", 1120, 280, 50, BLACK);
-		DrawText(" default.map", 1120, 360, 50, BLACK);
+		DrawText(mapname, 1120, 360, 50, BLACK);
 		DrawText("score:", 1120, 520, 50, BLACK);
 		DrawText(std::to_string(score).c_str(), 1120, 600, 50, BLACK);
 		
@@ -310,7 +309,6 @@ void update(void)
 
 position rand_position(int seed)
 {
-	std::srand(seed);
 	int x1 = (std::rand() % 14 + 1);
 	int y1 = (std::rand() % 14 + 1);
 	
