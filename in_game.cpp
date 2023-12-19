@@ -12,7 +12,8 @@ void update(void);
 void draw_game(void);
 void pause_game(void);
 bool check_apple(_apple apple);
-position rand_position(int seed);
+_apple rand_apple();
+position rand_position();
 
 using std::chrono::steady_clock;
 
@@ -142,12 +143,13 @@ void draw_game()
 	Image imgsnake_body = LoadImage("res/snake_body.png");
 	Image imgsnake_head = LoadImage("res/snake_head.png");
 	Image imgwall = LoadImage("res/wall.png");
-	Image imgapple = LoadImage("res/apple.png");
+	Image imgapple0 = LoadImage("res/apple_0.png");
+	Image imgapple1 = LoadImage("res/apple_1.png");
+	Image imgapple2 = LoadImage("res/apple_2.png");
 	Texture twall = LoadTextureFromImage(imgwall);
 	Texture tbody = LoadTextureFromImage(imgsnake_body);
 	Texture thead = LoadTextureFromImage(imgsnake_head);
-	Texture tapple = LoadTextureFromImage(imgapple);
-	
+	Texture tapple[3] = {LoadTextureFromImage(imgapple0),LoadTextureFromImage(imgapple1),LoadTextureFromImage(imgapple2)};
 	BeginDrawing();
 	ClearBackground(WHITE);
 	
@@ -175,9 +177,9 @@ void draw_game()
 		
 		// 绘制蛇
 		
-		for (auto applef : apple)
+		for (auto appled : apple)
 		{
-			DrawTexture(tapple, p + applef.x * u, p + applef.y * u, WHITE);
+			DrawTexture(tapple[appled.type], p + appled.x * u, p + appled.y * u, WHITE);
 		}
 		
 		// 绘制苹果
@@ -286,14 +288,12 @@ void update(void)
 		{
 			while (1)
 			{
-				position temp = rand_position(time(NULL));
-				apple[i].x = temp.x;
-				apple[i].y = temp.y;
+				apple[i]=rand_apple();
 				if (check_apple(apple[i]))
 					break;
 			}
 			apple[i].ate = false;
-			score += 3;
+			score += apple[i].type+1;
 		}
 		
 		for (unsigned int i = 1; i < snake.size(); i++)
@@ -307,7 +307,7 @@ void update(void)
 	return;
 }
 
-position rand_position(int seed)
+position rand_position()
 {
 	int x1 = (std::rand() % 14 + 1);
 	int y1 = (std::rand() % 14 + 1);
@@ -315,6 +315,13 @@ position rand_position(int seed)
 	return (position){x1, y1};
 }
 
+_apple rand_apple()
+{
+	position temp = rand_position();
+	int type=0;
+	type = rand()%3;
+	return _apple{temp.x,temp.y,type,true};
+}
 void pause_game(void)
 {
 	while (pause)
@@ -327,19 +334,27 @@ void pause_game(void)
 	return;
 }
 
-bool check_apple(_apple apple)
+bool check_apple(_apple appled)
 {
 	for (auto i : snake)
 	{
-		if (i.x == apple.x && i.y == apple.y)
+		if (i.x == appled.x && i.y == appled.y)
 			return false;
 	}
 	
 	for (auto i : obstacle)
 	{
-		if (i.x == apple.x && i.y == apple.y)
+		if (i.x == appled.x && i.y == appled.y)
 			return false;
 	}
 	
+	for(unsigned i=0;i<apple.size();i++)
+	{
+		for(unsigned j=i+1;j<apple.size();j++)
+		{
+			if (apple[i].x == apple[j].x && apple[i].y == apple[j].y)
+				return false;
+		}
+	}
 	return true;
 }

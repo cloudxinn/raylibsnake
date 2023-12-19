@@ -23,7 +23,7 @@ struct _snake{
 struct _apple{
 	int x;
 	int y;
-	int type;
+	int type=2;
 	bool ate = false;
 };
 //0-Right

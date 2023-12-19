@@ -43,7 +43,10 @@ void begin_game(int m, int n)
 	
 	obstacle=obstacletemp;
 	snake_length = snake.size(); // 获取蛇的初始长度
-	apple.push_back({3, 2, 0, false}); // 初始化一个苹果的位置
+	for(int i=0;i<fruit_num;i++)
+	{
+		apple.push_back({3, 2+i, 0, false}); // 初始化苹果的位置
+	}
 	
 	//设定速度
 	level = 1.0 / speed;
