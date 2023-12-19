@@ -12,8 +12,7 @@ void update(void);
 void draw_game(void);
 void pause_game(void);
 bool check_apple(_apple apple);
-_apple rand_apple();
-position rand_position();
+
 
 using std::chrono::steady_clock;
 

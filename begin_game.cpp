@@ -47,6 +47,17 @@ void begin_game(int m, int n)
 	{
 		apple.push_back({3, 2+i, 0, false}); // 初始化苹果的位置
 	}
+	for (unsigned i = 0; i < apple.size(); i++)
+	{
+		while (1)
+		{
+			apple[i]=rand_apple();
+			if (check_apple(apple[i]))
+				break;
+		}
+		apple[i].ate = false;
+		
+	}
 	
 	//设定速度
 	level = 1.0 / speed;

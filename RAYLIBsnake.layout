@@ -1,25 +1,5 @@
 [
     {
-        "caretX": 3,
-        "caretY": 200,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/in_game.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 4,
-        "topLine": 116
-    },
-    {
-        "caretX": 10,
-        "caretY": 23,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/structs.h",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 6,
-        "topLine": 1
-    },
-    {
         "caretX": 16,
         "caretY": 2,
         "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/end_game.cpp",
@@ -30,14 +10,24 @@
         "topLine": 1
     },
     {
-        "caretX": 3,
-        "caretY": 90,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/main.cpp",
+        "caretX": 21,
+        "caretY": 33,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/global_var.h",
         "focused": false,
         "isOpen": true,
         "leftChar": 1,
-        "order": 3,
-        "topLine": 16
+        "order": 5,
+        "topLine": 19
+    },
+    {
+        "caretX": 9,
+        "caretY": 33,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/structs.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 6,
+        "topLine": 1
     },
     {
         "caretX": 11,
@@ -60,23 +50,33 @@
         "topLine": 1
     },
     {
+        "caretX": 1,
+        "caretY": 15,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/in_game.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 4,
+        "topLine": 1
+    },
+    {
         "caretX": 3,
-        "caretY": 48,
+        "caretY": 90,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/main.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 3,
+        "topLine": 31
+    },
+    {
+        "caretX": 2,
+        "caretY": 61,
         "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/begin_game.cpp",
         "focused": true,
         "isOpen": true,
         "leftChar": 1,
         "order": 2,
-        "topLine": 22
-    },
-    {
-        "caretX": 21,
-        "caretY": 33,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/global_var.h",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 5,
-        "topLine": 17
+        "topLine": 34
     }
 ]
