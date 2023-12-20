@@ -89,14 +89,13 @@ void in_game()
 		}
 		
 		// 处理蛇自身碰撞
-		for (unsigned i = 0; i < mines.size(); i++)
-		{
-			if ((snake[0].x < mines[i].x + 0.5 && (mines[0].x > mines[i].x - 0.5) &&
-				(snake[0].y < (mines[i].y + 0.5) && (mines[0].y) > mines[i].y - 0.5)))
-			{
+		for (unsigned i = 0; i < mines.size(); i++) {
+			if (snake[0].x == mines[i].x && snake[0].y == mines[i].y) {
 				gameover = true;
+				  // 可以提前结束循环，因为已经确定游戏结束
 			}
 		}
+
 		
 		
 		if (obstacle.size())
@@ -245,9 +244,14 @@ void update(void)
 {
 	stepsSinceLastMine++;
 	if (stepsSinceLastMine > 10) {
-		position minePos = rand_position();
-		if (!mines.empty())
-		{
+		position minePos;  // 在循环之外声明 minePos
+		while (1) {
+			minePos = rand_position();
+			if (check_mine({minePos.x, minePos.y, true}))
+				break;
+		}
+		
+		if (!mines.empty()) {
 			mines.erase(mines.begin()); // 移除第一个炸弹
 		}
 		mines.push_back({minePos.x, minePos.y, true});
@@ -382,6 +386,30 @@ bool check_apple(_apple appled)
 		for(unsigned j=i+1;j<apple.size();j++)
 		{
 			if (apple[i].x == apple[j].x && apple[i].y == apple[j].y)
+				return false;
+		}
+	}
+	return true;
+}
+bool check_mine(_mine mined)
+{
+	for (auto i : snake)
+	{
+		if (i.x == mined.x && i.y == mined.y)
+			return false;
+	}
+	
+	for (auto i : obstacle)
+	{
+		if (i.x == mined.x && i.y == mined.y)
+			return false;
+	}
+	
+	for(unsigned i=0;i<mines.size();i++)
+	{
+		for(unsigned j=i+1;j<mines.size();j++)
+		{
+			if (mines[i].x == mines[j].x && mines[i].y == mines[j].y)
 				return false;
 		}
 	}
