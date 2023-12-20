@@ -15,10 +15,10 @@ static bool mapset = false;
 static bool configset = false; 
 static bool mapset_create = false;   
 static bool configset_create = false; 
-double level = 2.2 / speed;          // 游戏速度
+double level = buff/ speed;          // 游戏速度
 
 using namespace std; 
-Vector2 mouse;       
+Vector2 mouse;
 
 int main()
 {
@@ -31,6 +31,7 @@ int main()
 	setfont("res/font.ttf", 50);             // 设置字体
 	
 	// 游戏开始
+
 	while (!gamestart)
 	{
 		BeginDrawing(); // 绘制
@@ -82,8 +83,10 @@ int main()
 	cout << width << endl << length;
 	
 	// 主循环
+	
 	while (!WindowShouldClose())
 	{
+		
 		if (!gameover)
 		{
 			in_game();    //进行游戏
