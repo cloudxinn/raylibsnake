@@ -134,6 +134,7 @@ void in_game()
 		
 		return;
 	}
+	
 	return;
 }
 

@@ -254,7 +254,9 @@ bool create_config(void)
 	bool save = false;
 	int _level=1;
 	int _applenum=1;
-	char _applepro[3][50]{"0.1","0.3","0.6"};
+	int _applepro[3]={1,3,6};
+	bool msg_box = false;
+	//char _apple_pro[3][50]{"0.1","0.3","0.6"};
 	
 	
 	while (!exit)
@@ -272,16 +274,20 @@ bool create_config(void)
 		int _newlevel = GuiSliderBar((Rectangle){240, 160, 880, 120}, "难度：", TextFormat("%i", (int)_level), _level, 1, 10);
 		int _newapplenum = GuiSliderBar((Rectangle){240, 320, 880, 120}, "食物数量：", TextFormat("%i", (int)_applenum), _applenum, 1, 5);
 		
+		_applepro[0] = GuiSliderBar((Rectangle){240, 640, 240, 120}, "1分", TextFormat("%.1f", (double)_applepro[0]/10.0), _applepro[0], 1, 10);
+		_applepro[1] = GuiSliderBar((Rectangle){640, 640, 240, 120}, "2分", TextFormat("%.1f", (double)_applepro[1]/10.0), _applepro[1], 1, 10);
+		_applepro[2] = GuiSliderBar((Rectangle){1080, 640, 240, 120}, "3分", TextFormat("%.1f", (double)_applepro[2]/10.0), _applepro[2], 1, 10);
+		
 		if (GuiTextBox((Rectangle){240, 800, 880, 120}, configname, 120, maptextBox0EditMode))
 			maptextBox0EditMode = !maptextBox0EditMode;
 		if (GuiTextBox((Rectangle){240, 480, 880, 120}, _seed, 120, maptextBox1EditMode))
 			maptextBox1EditMode = !maptextBox1EditMode;
-		if (GuiTextBox((Rectangle){240, 640, 240, 120}, _applepro[0], 120, maptextBox2EditMode))
+		/*if (GuiTextBox((Rectangle){240, 640, 240, 120}, _apple_pro[0], 120, maptextBox2EditMode))
 			maptextBox2EditMode = !maptextBox2EditMode;
-		if (GuiTextBox((Rectangle){600, 640, 240, 120}, _applepro[1], 120, maptextBox3EditMode))
+		if (GuiTextBox((Rectangle){600, 640, 240, 120}, _apple_pro[1], 120, maptextBox3EditMode))
 			maptextBox3EditMode = !maptextBox3EditMode;
-		if (GuiTextBox((Rectangle){960, 640, 240, 120}, _applepro[2], 120, maptextBox4EditMode))
-			maptextBox4EditMode = !maptextBox4EditMode;
+		if (GuiTextBox((Rectangle){960, 640, 240, 120}, _apple_pro[2], 120, maptextBox4EditMode))
+			maptextBox4EditMode = !maptextBox4EditMode;*/
 		
 		DrawTextEx(font, "食物生成概率", (Vector2){0, 640}, 40, 5, BLACK);
 		DrawTextEx(font, "种子", (Vector2){0, 480}, 80, 5, BLACK);
@@ -295,12 +301,44 @@ bool create_config(void)
 			_applenum = _newapplenum;
 		}
 		
-		
+		if(msg_box)
+		{
+			DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
+			int result = GuiMessageBox((Rectangle){ (float)GetScreenWidth()/2 - 200, (float)GetScreenHeight()/2 - 200, 640, 200 }, GuiIconText(ICON_CPU, "ERROR"), "非法输入", "返回");
+			printf("%d",result);
+			if ((result == 1) || (result == 0)) msg_box = false;
+			if(!msg_box)
+			{
+				setfont("res/font.ttf", 50);
+			}
+		}
 		EndDrawing();
 		
 		// 保存
 		if (save)
 		{
+			bool flag = false;
+			if(_seed[0]=='-') flag = false;
+			else if(_seed[0]>='0'&&_seed[0]<='9') flag =false;
+			else flag=true;
+			for(int i=1;i<50;i++)
+			{
+				if(_seed[i]=='\0') break;
+				if(_seed[i]<'0'||_seed[i]>'9') flag = true;
+			}
+			if(_applepro[0]+_applepro[1]+_applepro[2]!=10||flag)
+			{
+				save = false;
+				msg_box = true;
+				setfont("res/font.ttf", 35);
+			}
+			if(save)
+			{
+			if(_seed[1]=='\0') 
+			{
+				_seed[1]='1';
+				_seed[2]='\0';
+			}
 			std::ofstream configmenu("res/configs.list", ios::app);
 			configmenu << endl <<confignamestring;
 			confignamestring = "config/" + confignamestring;
@@ -308,11 +346,12 @@ bool create_config(void)
 			outconfig << _level << endl
 			<< _seed << endl
 			<< _applenum << endl
-			<< _applepro[0] << " " << _applepro[1] << " " << _applepro[2]; 
+			<< _applepro[0]/10.0 << " " << _applepro[1]/10.0 << " " << _applepro[2]/10.0; 
 			configmenu.close();
 			outconfig.close();
 			return true;
-}
+			}
+		}
 	}
 }
 
