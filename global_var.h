@@ -8,6 +8,7 @@
 #include "raylib.h"
 
 extern std::vector<_snake> snake;
+extern std::vector<_mine> mines;
 extern std::vector<_snake> snake_Old;
 extern std::vector<position> wall[4];
 extern std::vector<position> obstacle;
@@ -19,6 +20,7 @@ extern int snake_length;
 extern const int u;
 extern const int p;
 extern int score;
+extern int stepsSinceLastMine;
 extern int width;
 extern int length;
 extern int obstacle_num;
