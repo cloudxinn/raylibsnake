@@ -20,6 +20,7 @@ struct _apple{
 struct _mine {
 	int x;
 	int y;
+	int ty=1;
 	bool active;
 };
 void begin_game(int m, int n);
