@@ -8,6 +8,17 @@
 #include <chrono>
 #include <ctime>
 
+Image imgsnake_body = LoadImage("res/snake_body.png");
+Image imgsnake_head = LoadImage("res/snake_head.png");
+Image imgwall = LoadImage("res/wall.png");
+Image imgapple0 = LoadImage("res/apple_1.png");
+Image imgapple1 = LoadImage("res/apple_1.png");
+Image imgapple2 = LoadImage("res/apple_2.png");
+Image imgmine = LoadImage("res/mine.png");
+Image imgmine2 = LoadImage("res/mine2.png");
+Image imgmine3 = LoadImage("res/mine3.png");
+
+
 void update(void);
 void draw_game(void);
 void pause_game(void);
@@ -91,11 +102,20 @@ void in_game()
 		// 处理蛇自身碰撞
 		for (unsigned i = 0; i < mines.size(); i++) {
 			if (snake[0].x == mines[i].x && snake[0].y == mines[i].y) {
+				if(mines[i].ty==0){
 				gameover = true;
-				  // 可以提前结束循环，因为已经确定游戏结束
+				}
+				if(mines[i].ty==1){
+					mines[i].active=0;
+					buff=9;
+				}
+				if(mines[i].ty==2){
+					mines[i].active=0;
+					buff=1;
+				}
 			}
 		}
-
+		level = buff/ speed;
 		
 		
 		if (obstacle.size())
@@ -148,18 +168,14 @@ void in_game()
 
 void draw_game()
 {
-	Image imgsnake_body = LoadImage("res/snake_body.png");
-	Image imgsnake_head = LoadImage("res/snake_head.png");
-	Image imgwall = LoadImage("res/wall.png");
-	Image imgapple0 = LoadImage("res/apple_1.png");
-	Image imgapple1 = LoadImage("res/apple_1.png");
-	Image imgapple2 = LoadImage("res/apple_2.png");
-	Image imgmine = LoadImage("res/mine.png");
+	
 	Texture twall = LoadTextureFromImage(imgwall);
 	Texture tbody = LoadTextureFromImage(imgsnake_body);
 	Texture thead = LoadTextureFromImage(imgsnake_head);
-	Texture tmine = LoadTextureFromImage(imgmine);
-	Texture tapple[3] = {LoadTextureFromImage(imgapple0),LoadTextureFromImage(imgapple1),LoadTextureFromImage(imgapple2)};
+	Texture tmine[3] = {LoadTextureFromImage(imgmine), LoadTextureFromImage(imgmine2), LoadTextureFromImage(imgmine3)};
+	Texture tapple[3] = {LoadTextureFromImage(imgapple0), LoadTextureFromImage(imgapple1), LoadTextureFromImage(imgapple2)};
+	
+	
 	BeginDrawing();
 	ClearBackground(WHITE);
 	
@@ -202,9 +218,7 @@ void draw_game()
 		for (auto mine : mines) {
 			if (mine.active) {
 				// 加载地雷图片并在地雷位置绘制
-				
-				DrawTexture(tmine, p + mine.x * u, p + mine.y * u, WHITE);
-				
+				DrawTexture(tmine[mine.ty], p + mine.x * u, p + mine.y * u, WHITE);	
 			}
 		}
 		// 绘制障碍物
@@ -243,18 +257,20 @@ void draw_game()
 void update(void)
 {
 	stepsSinceLastMine++;
-	if (stepsSinceLastMine > 10) {
-		position minePos;  // 在循环之外声明 minePos
+	if (stepsSinceLastMine > 15) {
+		position minePos;  
+		int ty;
+		ty=rand()%3;
 		while (1) {
 			minePos = rand_position();
-			if (check_mine({minePos.x, minePos.y, true}))
+			if (check_mine({minePos.x, minePos.y,ty, true}))
 				break;
 		}
 		
 		if (!mines.empty()) {
 			mines.erase(mines.begin()); // 移除第一个炸弹
 		}
-		mines.push_back({minePos.x, minePos.y, true});
+		mines.push_back({minePos.x, minePos.y, ty,true});
 		stepsSinceLastMine = 0; // 重置计数器
 	}
 	switch (snake[0].direct)
