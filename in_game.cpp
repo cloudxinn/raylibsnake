@@ -20,6 +20,7 @@ std::vector<_snake> snake_Old; // 保存上一帧的蛇身位置
 static bool pause = false; // 游戏暂停
 static std::chrono::steady_clock::time_point timeold; // 上一次更新时间点
 int score = 0; // 游戏得分
+int stepsSinceLastMine=0;
 clock_t now; // 当前时钟时间
 
 void in_game()
@@ -88,7 +89,14 @@ void in_game()
 		}
 		
 		// 处理蛇自身碰撞
-		
+		for (unsigned i = 0; i < mines.size(); i++)
+		{
+			if ((snake[0].x < mines[i].x + 0.5 && (mines[0].x > mines[i].x - 0.5) &&
+				(snake[0].y < (mines[i].y + 0.5) && (mines[0].y) > mines[i].y - 0.5)))
+			{
+				gameover = true;
+			}
+		}
 		
 		
 		if (obstacle.size())
@@ -101,6 +109,7 @@ void in_game()
 		}
 		
 		// 处理蛇与障碍物碰撞
+		
 		
 		bool isupdated = false;
 		if (firststart)
@@ -143,12 +152,14 @@ void draw_game()
 	Image imgsnake_body = LoadImage("res/snake_body.png");
 	Image imgsnake_head = LoadImage("res/snake_head.png");
 	Image imgwall = LoadImage("res/wall.png");
-	Image imgapple0 = LoadImage("res/apple_0.png");
+	Image imgapple0 = LoadImage("res/apple_1.png");
 	Image imgapple1 = LoadImage("res/apple_1.png");
 	Image imgapple2 = LoadImage("res/apple_2.png");
+	Image imgmine = LoadImage("res/mine.png");
 	Texture twall = LoadTextureFromImage(imgwall);
 	Texture tbody = LoadTextureFromImage(imgsnake_body);
 	Texture thead = LoadTextureFromImage(imgsnake_head);
+	Texture tmine = LoadTextureFromImage(imgmine);
 	Texture tapple[3] = {LoadTextureFromImage(imgapple0),LoadTextureFromImage(imgapple1),LoadTextureFromImage(imgapple2)};
 	BeginDrawing();
 	ClearBackground(WHITE);
@@ -189,6 +200,14 @@ void draw_game()
 			DrawTexture(twall, p + obstacle[i].x * u, p + obstacle[i].y * u, WHITE);
 		}
 		
+		for (auto mine : mines) {
+			if (mine.active) {
+				// 加载地雷图片并在地雷位置绘制
+				
+				DrawTexture(tmine, p + mine.x * u, p + mine.y * u, WHITE);
+				
+			}
+		}
 		// 绘制障碍物
 		
 		DrawText("config:", 1120, 120, 50, BLACK);
@@ -224,6 +243,16 @@ void draw_game()
 
 void update(void)
 {
+	stepsSinceLastMine++;
+	if (stepsSinceLastMine > 10) {
+		position minePos = rand_position();
+		if (!mines.empty())
+		{
+			mines.erase(mines.begin()); // 移除第一个炸弹
+		}
+		mines.push_back({minePos.x, minePos.y, true});
+		stepsSinceLastMine = 0; // 重置计数器
+	}
 	switch (snake[0].direct)
 	{
 	case 0:
