@@ -17,6 +17,11 @@ struct _apple{
 	int type=2;
 	bool ate = false;
 };
+struct _mine {
+	int x;
+	int y;
+	bool active;
+};
 void begin_game(int m, int n);
 void in_game(void);
 void end_game(void);
