@@ -12,7 +12,7 @@ std::vector<_snake> snake; // 蛇的信息
 std::vector<position> wall[4]; // 四个方向墙壁的向量
 std::vector<position> obstacle; // 障碍物
 std::vector<_apple> apple; // 苹果
-
+std::vector<_mine> mines;
 void begin_game(int m, int n)
 { 
 	//清空历史信息
