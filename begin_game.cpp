@@ -15,6 +15,11 @@ std::vector<_apple> apple; // 苹果
 std::vector<_mine> mines;
 double buff=5;
 
+int move = 0;
+std::vector<std::string> record;
+
+
+
 void begin_game(int m, int n)
 { 
 	//清空历史信息
@@ -26,6 +31,8 @@ void begin_game(int m, int n)
 	wall[3].clear();  
 	apple.clear(); 
 	score=0;
+	record.clear();
+	
 	for (int i = 0; i < 4; i++)
 	{
 		snake.push_back({(_snake){width / 2 - i, length / 2, 0}}); // 初始化蛇的位置
@@ -64,5 +71,9 @@ void begin_game(int m, int n)
 	
 	srand((seed==-1?time(NULL):seed));
 	level = buff/ speed;
+	
+	//record.push_back();
+	//record.front()+='\n';
+	//record.push_back();
 	return;
 }

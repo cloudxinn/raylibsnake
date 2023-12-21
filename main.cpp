@@ -20,6 +20,17 @@ double level = buff/ speed;          // 游戏速度
 using namespace std; 
 Vector2 mouse;
 
+Image imgsnake_body = LoadImage("res/snake_body.png");
+Image imgsnake_head = LoadImage("res/snake_head.png");
+Image imgwall = LoadImage("res/wall.png");
+Image imgapple[3] = {LoadImage("res/apple_1.png"),LoadImage("res/apple_1.png"),LoadImage("res/apple_2.png")};
+Image imgmine[3] = {LoadImage("res/mine.png"),LoadImage("res/mine2.png"),LoadImage("res/mine3.png")};
+Texture twall;
+Texture tbody;
+Texture thead;
+Texture tmine[3];
+Texture tapple[3];
+
 int main()
 {
 	InitWindow(1600, 1200, "SNAKE"); // 初始化窗口
@@ -28,10 +39,11 @@ int main()
 	
 	Image bg = LoadImage("res/tittle.png");  // 加载标题图像
 	Texture tbg = LoadTextureFromImage(bg); // 从图像创建纹理
+	twall = LoadTextureFromImage(imgwall);
 	setfont("res/font.ttf", 50);             // 设置字体
 	
 	// 游戏开始
-
+	
 	while (!gamestart)
 	{
 		BeginDrawing(); // 绘制
@@ -82,8 +94,16 @@ int main()
 	begin_game(width + 2, length + 2); // 游戏初始化
 	cout << width << endl << length;
 	
-	// 主循环
+	//加载资源
+	tbody = LoadTextureFromImage(imgsnake_body);
+	thead = LoadTextureFromImage(imgsnake_head);
+	for(int i=0;i<3;i++)
+	{
+	tmine[i] = LoadTextureFromImage(imgmine[i]);
+	tapple[i] = LoadTextureFromImage(imgapple[i]);
+	}
 	
+	// 主循环
 	while (!WindowShouldClose())
 	{
 		
@@ -97,7 +117,7 @@ int main()
 			BeginDrawing(); // 开始绘制
 			
 			ClearBackground(WHITE); // 清空背景
-			
+		
 			DrawText("score:", 560, 280, 120, BLACK);            
 			DrawText(std::to_string(score).c_str(), 600, 520, 160, BLACK); // 绘制得分
 			gameover = !GuiButton((Rectangle){520, 760, 560, 200}, "Once Again");
@@ -108,5 +128,19 @@ int main()
 	
 	UnloadFont(font); 
 	// end_game()
+	UnloadImage(imgsnake_body);
+	UnloadImage(imgsnake_head);
+	UnloadImage(imgwall);
+	for(int i=0;i<3;i++)
+	{
+	UnloadImage(imgapple[i]);
+	UnloadImage(imgmine[i]);
+	UnloadTexture(tmine[i]);
+	UnloadTexture(tapple[i]);
+	}
+	UnloadTexture(twall);
+	UnloadTexture(tbody);
+	UnloadTexture(thead);
+	
 	return 0;
 }

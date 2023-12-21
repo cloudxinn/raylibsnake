@@ -365,8 +365,6 @@ bool create_map(void)
 	wallstatue.fill(true);
 	
 	Vector2 mouse;
-	Image imgwall = LoadImage("res/wall.png");
-	Texture twall = LoadTextureFromImage(imgwall);
 	
 	// 初始化游戏板
 	for (int i = 0; i < _width; i++)
@@ -385,7 +383,6 @@ bool create_map(void)
 		mouse = GetMousePosition();
 		BeginDrawing();
 		ClearBackground(WHITE);
-		
 		// 返回
 		exit = GuiButton((Rectangle){1160, 960, 360, 160}, "返回") || WindowShouldClose();
 		
@@ -509,14 +506,9 @@ bool create_map(void)
 			}
 			mapmenu.close();
 			outmap.close();
-			UnloadImage(imgwall);
-			UnloadTexture(twall);
 			return true;
 		}
 	}
-	
-	UnloadImage(imgwall);
-	UnloadTexture(twall);
 	return true;
 }
 

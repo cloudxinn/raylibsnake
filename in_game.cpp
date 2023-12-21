@@ -8,16 +8,6 @@
 #include <chrono>
 #include <ctime>
 
-Image imgsnake_body = LoadImage("res/snake_body.png");
-Image imgsnake_head = LoadImage("res/snake_head.png");
-Image imgwall = LoadImage("res/wall.png");
-Image imgapple0 = LoadImage("res/apple_1.png");
-Image imgapple1 = LoadImage("res/apple_1.png");
-Image imgapple2 = LoadImage("res/apple_2.png");
-Image imgmine = LoadImage("res/mine.png");
-Image imgmine2 = LoadImage("res/mine2.png");
-Image imgmine3 = LoadImage("res/mine3.png");
-
 
 void update(void);
 void draw_game(void);
@@ -33,6 +23,9 @@ static std::chrono::steady_clock::time_point timeold; // 上一次更新时间�
 int score = 0; // 游戏得分
 int stepsSinceLastMine=0;
 clock_t now; // 当前时钟时间
+
+
+
 
 void in_game()
 {	
@@ -169,12 +162,8 @@ void in_game()
 void draw_game()
 {
 	
-	Texture twall = LoadTextureFromImage(imgwall);
-	Texture tbody = LoadTextureFromImage(imgsnake_body);
-	Texture thead = LoadTextureFromImage(imgsnake_head);
-	Texture tmine[3] = {LoadTextureFromImage(imgmine), LoadTextureFromImage(imgmine2), LoadTextureFromImage(imgmine3)};
-	Texture tapple[3] = {LoadTextureFromImage(imgapple0), LoadTextureFromImage(imgapple1), LoadTextureFromImage(imgapple2)};
 	
+
 	
 	BeginDrawing();
 	ClearBackground(WHITE);
