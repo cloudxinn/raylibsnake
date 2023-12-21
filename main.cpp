@@ -15,6 +15,9 @@ static bool mapset = false;
 static bool configset = false; 
 static bool mapset_create = false;   
 static bool configset_create = false; 
+static bool save_record = false;
+char recordname[255];
+char input[255];
 double level = buff/ speed;          // 游戏速度
 
 using namespace std; 
@@ -115,13 +118,34 @@ int main()
 		else
 		{
 			BeginDrawing(); // 开始绘制
-			
 			ClearBackground(WHITE); // 清空背景
-		
 			DrawText("score:", 560, 280, 120, BLACK);            
 			DrawText(std::to_string(score).c_str(), 600, 520, 160, BLACK); // 绘制得分
 			gameover = !GuiButton((Rectangle){520, 760, 560, 200}, "Once Again");
-			if(!gameover) begin_game(width + 2, length + 2);
+			if(GuiButton((Rectangle){520, 960, 560, 200}, GuiIconText(ICON_FILE_SAVE, "Save File"))) 
+			{
+				save_record = true;
+				setfont("res/font.ttf", 30);
+			}
+			if(save_record)
+			{
+				DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
+				int result = GuiTextInputBox((Rectangle){ (float)GetScreenWidth()/2 - 120, (float)GetScreenHeight()/2 - 60, 400, 200 }, "Save", GuiIconText(ICON_FILE_SAVE, "Save file as..."), "Ok;Cancel", input, 255, NULL);
+				if (result == 1)
+				{
+					strcpy(recordname, input);
+				}
+				if ((result == 0) || (result == 1) || (result == 2))
+				{
+					save_record = false;
+					strcpy(input, "\0");
+				}
+			}
+			if(!gameover) 
+			{
+				begin_game(width + 2, length + 2);
+				setfont("res/font.ttf", 50);
+			}
 			EndDrawing(); // 结束绘制
 		}
 	}
