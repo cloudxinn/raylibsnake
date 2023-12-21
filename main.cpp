@@ -129,6 +129,10 @@ int main()
 			}
 			if(save_record)
 			{
+				for(auto i:record)
+				{
+					cout << i;
+				}
 				DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
 				int result = GuiTextInputBox((Rectangle){ (float)GetScreenWidth()/2 - 120, (float)GetScreenHeight()/2 - 60, 400, 200 }, "Save", GuiIconText(ICON_FILE_SAVE, "Save file as..."), "Ok;Cancel", input, 255, NULL);
 				if (result == 1)

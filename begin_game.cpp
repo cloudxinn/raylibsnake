@@ -71,9 +71,10 @@ void begin_game(int m, int n)
 	
 	srand((seed==-1?time(NULL):seed));
 	level = buff/ speed;
-	
-	//record.push_back();
-	//record.front()+='\n';
-	//record.push_back();
+	//记录配置和地图
+	record.push_back(configname);
+	record.front()+='\n';
+	record.front()+=mapname;
+	record.front()+="\n";
 	return;
 }

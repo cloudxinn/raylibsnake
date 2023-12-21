@@ -161,10 +161,7 @@ void in_game()
 
 void draw_game()
 {
-	
-	
 
-	
 	BeginDrawing();
 	ClearBackground(WHITE);
 	
@@ -245,6 +242,10 @@ void draw_game()
 
 void update(void)
 {
+	move++;
+	record.push_back(std::to_string(move));
+	record.back()+='\n';
+	
 	stepsSinceLastMine++;
 	if (stepsSinceLastMine > 15) {
 		position minePos;  
@@ -266,15 +267,23 @@ void update(void)
 	{
 	case 0:
 		snake[0].x += 1;
+		record.back()+='D';
+		record.back()+='\n';
 		break;
 	case 1:
 		snake[0].x -= 1;
+		record.back()+='A';
+		record.back()+='\n';
 		break;
 	case 2:
 		snake[0].y += 1;
+		record.back()+='S';
+		record.back()+='\n';
 		break;
 	default:
 		snake[0].y -= 1;
+		record.back()+='W';
+		record.back()+='\n';
 		break;
 	}
 	
@@ -341,7 +350,16 @@ void update(void)
 	}
 	
 	// 更新苹果位置
-	
+	for(unsigned i = 0;i<apple.size();i++)
+	{
+		record.back()+="F ";
+		record.back()+=std::to_string(apple[i].x);
+		record.back()+=' ';
+		record.back()+=std::to_string(apple[i].y);
+		record.back()+=' ';
+		record.back()+=std::to_string(apple[i].type);
+		record.back()+='\n';
+	}
 	return;
 }
 
