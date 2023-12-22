@@ -12,8 +12,27 @@ using std::ios;
 bool close = false;
 static void reupdate();
 static ifstream rec;
+double recordspeed=0;
 void replayrecord()
 {	
+	while (!WindowShouldClose())
+	{
+		BeginDrawing();
+		
+		ClearBackground(RAYWHITE);
+		
+		recordspeed = GuiSliderBar((Rectangle){650, 400, 300, 60}, "回放速度", TextFormat("%.2f", recordspeed), recordspeed, 0.5, 2.0);
+		
+		DrawText("0.5x--2x", 650, 330, 40, BLACK);
+
+		if (GuiButton((Rectangle){650, 500, 120, 40}, "确定"))
+		{
+			break; 
+		}
+		
+		EndDrawing();
+	}
+	
 	rec.open("record/new.rec", ios::in);
 	rec >> configname;
 	std::string config_filestring = "config/";
@@ -25,6 +44,8 @@ void replayrecord()
 	furit_pro[2] = _config.get() * 10;
 	_config.close();
 	
+	
+	level = (recordspeed*buff)/speed;
 	rec >> mapname;
 	std::string map_filestring = "maps/";
 	map_filestring += mapname;
@@ -51,7 +72,7 @@ void replayrecord()
 		{
 			snake_Old.push_back(snake[i]);
 		}
-		level = 0.1;
+		
 		if (clock() - now >= 1000 * level)
 		{
 			reupdate();
@@ -133,4 +154,5 @@ void reupdate()
 		snake[i] = snake_Old[i - 1];
 	}
 }
+
 
