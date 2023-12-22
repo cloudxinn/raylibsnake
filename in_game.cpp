@@ -22,10 +22,6 @@ static bool pause = false; // 游戏暂停
 static std::chrono::steady_clock::time_point timeold; // 上一次更新时间点
 int score = 0; // 游戏得分
 int stepsSinceLastMine=0;
-clock_t now; // 当前时钟时间
-
-
-
 
 void in_game()
 {	
@@ -123,28 +119,11 @@ void in_game()
 		// 处理蛇与障碍物碰撞
 		
 		
-		bool isupdated = false;
-		if (firststart)
-		{
-			update();
-			firststart = false;
-			now = clock();
-		}
-		
 		if (clock() - now >= 1000 * level)
 		{
 			update();
-			isupdated = true;
-		}
-		
-		if (isupdated)
-		{
 			now = clock();
-			isupdated = false;
 		}
-		
-		// 更新游戏参数
-		
 		return;
 	}
 	else
@@ -161,69 +140,59 @@ void in_game()
 
 void draw_game()
 {
-
 	BeginDrawing();
 	ClearBackground(WHITE);
-	
-	if (!gameover)
+	for (unsigned i = 0; i < wall[0].size(); i++)
 	{
-		for (unsigned i = 0; i < wall[0].size(); i++)
+		DrawTexture(twall, p + wall[0][i].x * u, p + wall[0][i].y * u, WHITE);
+		DrawTexture(twall, p + wall[1][i].x * u, p + wall[1][i].y * u, WHITE);
+	}
+	
+	for (unsigned i = 0; i < wall[2].size(); i++)
+	{
+		DrawTexture(twall, p + wall[2][i].x * u, p + wall[2][i].y * u, WHITE);
+		DrawTexture(twall, p + wall[3][i].x * u, p + wall[3][i].y * u, WHITE);
+	}
+		
+	// 绘制墙体
+		
+	DrawTexture(thead, p + snake[0].x * u, p + snake[0].y * u, WHITE);
+	for (unsigned i = 1; i < snake.size(); i++)
+	{
+		DrawTexture(tbody, p + snake[i].x * u, p + snake[i].y * u, WHITE);
+	}
+		
+	// 绘制蛇
+	
+	for (auto appled : apple)
+	{
+		DrawTexture(tapple[appled.type], p + appled.x * u, p + appled.y * u, WHITE);
+	}
+		
+	// 绘制苹果
+		
+	for (unsigned i = 0; i < obstacle.size(); i++)
+	{
+		DrawTexture(twall, p + obstacle[i].x * u, p + obstacle[i].y * u, WHITE);
+	}
+		
+	for (auto mine : mines) 
+	{
+		if (mine.active) 
 		{
-			DrawTexture(twall, p + wall[0][i].x * u, p + wall[0][i].y * u, WHITE);
-			DrawTexture(twall, p + wall[1][i].x * u, p + wall[1][i].y * u, WHITE);
+			// 加载地雷图片并在地雷位置绘制
+			DrawTexture(tmine[mine.ty], p + mine.x * u, p + mine.y * u, WHITE);	
 		}
-		
-		for (unsigned i = 0; i < wall[2].size(); i++)
-		{
-			DrawTexture(twall, p + wall[2][i].x * u, p + wall[2][i].y * u, WHITE);
-			DrawTexture(twall, p + wall[3][i].x * u, p + wall[3][i].y * u, WHITE);
-		}
-		
-		// 绘制墙体
-		
-		DrawTexture(thead, p + snake[0].x * u, p + snake[0].y * u, WHITE);
-		for (unsigned i = 1; i < snake.size(); i++)
-		{
-			DrawTexture(tbody, p + snake[i].x * u, p + snake[i].y * u, WHITE);
-		}
-		
-		// 绘制蛇
-		
-		for (auto appled : apple)
-		{
-			DrawTexture(tapple[appled.type], p + appled.x * u, p + appled.y * u, WHITE);
-		}
-		
-		// 绘制苹果
-		
-		for (unsigned i = 0; i < obstacle.size(); i++)
-		{
-			DrawTexture(twall, p + obstacle[i].x * u, p + obstacle[i].y * u, WHITE);
-		}
-		
-		for (auto mine : mines) {
-			if (mine.active) {
-				// 加载地雷图片并在地雷位置绘制
-				DrawTexture(tmine[mine.ty], p + mine.x * u, p + mine.y * u, WHITE);	
-			}
-		}
+	}
 		// 绘制障碍物
 		
-		DrawText("config:", 1120, 120, 50, BLACK);
-		DrawText(configname, 1120, 200, 50, BLACK);
-		DrawText("map:", 1120, 280, 50, BLACK);
-		DrawText(mapname, 1120, 360, 50, BLACK);
-		DrawText("score:", 1120, 520, 50, BLACK);
-		DrawText(std::to_string(score).c_str(), 1120, 600, 50, BLACK);
-		
-		// 绘制文本信息
-	}
-	else
-	{
-		// 处理游戏结束
-		
-	}
-	
+	DrawText("config:", 1120, 120, 50, BLACK);
+	DrawText(configname, 1120, 200, 50, BLACK);
+	DrawText("map:", 1120, 280, 50, BLACK);
+	DrawText(mapname, 1120, 360, 50, BLACK);
+	DrawText("score:", 1120, 520, 50, BLACK);
+	DrawText(std::to_string(score).c_str(), 1120, 600, 50, BLACK);
+	// 绘制文本信息
 	EndDrawing();
 	
 	/*
@@ -236,33 +205,12 @@ void draw_game()
 	UnloadTexture(tapple);
 	UnloadImage(imgapple);
 	*/
-	
 	return;
 }
 
 void update(void)
 {
-	move++;
-	record.push_back(std::to_string(move));
-	record.back()+='\n';
-	
-	stepsSinceLastMine++;
-	if (stepsSinceLastMine > 15) {
-		position minePos;  
-		int ty;
-		ty=rand()%3;
-		while (1) {
-			minePos = rand_position();
-			if (check_mine({minePos.x, minePos.y,ty, true}))
-				break;
-		}
-		
-		if (!mines.empty()) {
-			mines.erase(mines.begin()); // 移除第一个炸弹
-		}
-		mines.push_back({minePos.x, minePos.y, ty,true});
-		stepsSinceLastMine = 0; // 重置计数器
-	}
+	std::cout << now << std::endl;
 	switch (snake[0].direct)
 	{
 	case 0:
@@ -287,6 +235,37 @@ void update(void)
 		break;
 	}
 	
+	
+	stepsSinceLastMine++;
+	if (stepsSinceLastMine > 15) {
+		position minePos;  
+		int ty;
+		ty=rand()%3;
+		while (1) {
+			minePos = rand_position();
+			if (check_mine({minePos.x, minePos.y,ty, true}))
+				break;
+		}
+		
+		if (!mines.empty()) {
+			mines.erase(mines.begin()); // 移除第一个炸弹
+		}
+		mines.push_back({minePos.x, minePos.y, ty,true});
+		stepsSinceLastMine = 0; // 重置计数器
+	}
+	for(unsigned i = 0;i<mines.size();i++)
+	{
+		if(mines[i].active)
+		{
+		record.back()+="M ";
+		record.back()+=std::to_string(mines[i].x);
+		record.back()+=' ';
+		record.back()+=std::to_string(mines[i].y);
+		record.back()+=' ';
+		record.back()+=std::to_string(mines[i].ty);
+		record.back()+='\n';
+		}
+	}
 	if (snake[0].x > width )
 	{
 		if(!wallstatue[3])
@@ -323,6 +302,7 @@ void update(void)
 		{
 			snake.push_back(snake_Old.back());
 			i.ate = false;
+			record.back()+="+\n";
 			break;
 		}
 	}
@@ -360,6 +340,7 @@ void update(void)
 		record.back()+=std::to_string(apple[i].type);
 		record.back()+='\n';
 	}
+	record.back()+="N\n";
 	return;
 }
 

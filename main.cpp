@@ -15,11 +15,11 @@ static bool mapset = false;
 static bool configset = false; 
 static bool mapset_create = false;   
 static bool configset_create = false; 
+static bool replay = false;
 static bool save_record = false;
 char recordname[255];
 char input[255];
 double level = buff/ speed;          // 游戏速度
-
 using namespace std; 
 Vector2 mouse;
 
@@ -33,37 +33,43 @@ Texture tbody;
 Texture thead;
 Texture tmine[3];
 Texture tapple[3];
-
+clock_t now = clock();
 int main()
 {
+
 	InitWindow(1600, 1200, "SNAKE"); // 初始化窗口
-	
 	SetTargetFPS(60); // 设置帧率
-	
 	Image bg = LoadImage("res/tittle.png");  // 加载标题图像
 	Texture tbg = LoadTextureFromImage(bg); // 从图像创建纹理
 	twall = LoadTextureFromImage(imgwall);
 	setfont("res/font.ttf", 50);             // 设置字体
-	
+	//加载资源
+	tbody = LoadTextureFromImage(imgsnake_body);
+	thead = LoadTextureFromImage(imgsnake_head);
+	for(int i=0;i<3;i++)
+	{
+		tmine[i] = LoadTextureFromImage(imgmine[i]);
+		tapple[i] = LoadTextureFromImage(imgapple[i]);
+	}
 	// 游戏开始
-	
 	while (!gamestart)
 	{
 		BeginDrawing(); // 绘制
-		
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR))); // 清空背景
-		
 		DrawTexture(tbg, 0, 0, WHITE); // 绘制标题
-		
 		// 绘制按钮
 		gamestart = GuiButton((Rectangle){360, 700, 720, 100}, "开始游戏");
 		mapset = GuiButton((Rectangle){360, 850, 300, 100}, "地图");
 		configset = GuiButton((Rectangle){360, 1000, 300, 100}, "配置");
 		mapset_create = GuiButton((Rectangle){800, 850, 280, 100}, "创建地图");
 		configset_create = GuiButton((Rectangle){800, 1000, 280, 100}, "创建配置");
-		
+		replay = GuiButton((Rectangle){1120, 1000, 280, 100}, "游戏回放");
+
 		EndDrawing(); // 结束绘制
-		
+		if(replay)
+		{
+			replayrecord();
+		}
 		// 处理用户选择
 		if (mapset)
 		{
@@ -96,16 +102,7 @@ int main()
 	
 	begin_game(width + 2, length + 2); // 游戏初始化
 	cout << width << endl << length;
-	
-	//加载资源
-	tbody = LoadTextureFromImage(imgsnake_body);
-	thead = LoadTextureFromImage(imgsnake_head);
-	for(int i=0;i<3;i++)
-	{
-	tmine[i] = LoadTextureFromImage(imgmine[i]);
-	tapple[i] = LoadTextureFromImage(imgapple[i]);
-	}
-	
+	now = clock();
 	// 主循环
 	while (!WindowShouldClose())
 	{
@@ -153,7 +150,6 @@ int main()
 			EndDrawing(); // 结束绘制
 		}
 	}
-	
 	UnloadFont(font); 
 	// end_game()
 	UnloadImage(imgsnake_body);
@@ -169,6 +165,5 @@ int main()
 	UnloadTexture(twall);
 	UnloadTexture(tbody);
 	UnloadTexture(thead);
-	
 	return 0;
 }

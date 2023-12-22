@@ -56,6 +56,5 @@ extern int codepointsCount;
 extern int *codepoints;
 extern Font font;
 
-extern int move;
 extern std::vector<std::string> record;
 #endif

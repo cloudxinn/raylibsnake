@@ -36,6 +36,7 @@ _apple rand_apple();
 position rand_position();
 bool check_apple(_apple);
 bool check_mine(_mine);
+void replayrecord();
 //0-Right
 //1-Left
 //2-Up

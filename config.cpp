@@ -167,7 +167,6 @@ bool setconfig(void)
 	}
 	configlist.pop_back();
 	bool con[configlist.size()] = {false};
-	
 	bool lastpage = false;
 	bool nextpage = false;
 	unsigned next_num = 0;
