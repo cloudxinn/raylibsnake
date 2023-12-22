@@ -50,7 +50,7 @@ extern int furit_pro[3];
 extern int seed;
 
 extern double buff;
-
+extern double recordspeed;
 extern char guitests[1000];
 extern int codepointsCount;
 extern int *codepoints;
