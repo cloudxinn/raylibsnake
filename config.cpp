@@ -25,6 +25,7 @@ int obstacle_num = 0;
 double speed = 10;
 char _seed[50] = "-1";
 int seed = -1;
+int _applepro[3]={1,3,6};
 int fruit_num = 5;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
 std::vector<position> obstacletemp;
@@ -253,7 +254,7 @@ bool create_config(void)
 	bool save = false;
 	int _level=1;
 	int _applenum=1;
-	int _applepro[3]={1,3,6};
+	
 	bool msg_box = false;
 	//char _apple_pro[3][50]{"0.1","0.3","0.6"};
 	
