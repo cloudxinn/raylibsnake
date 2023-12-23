@@ -20,12 +20,12 @@ using std::endl;
 using std::string;
 
 // 变量初始化
-int width = 15, length = 15;
+int width = 20, length = 20;
 int obstacle_num = 0;
 double speed = 10;
 char _seed[50] = "-1";
 int seed = -1;
-int fruit_num = 1;
+int fruit_num = 5;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
 std::vector<position> obstacletemp;
 char mapname[256] = "new.map";

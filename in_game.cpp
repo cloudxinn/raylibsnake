@@ -310,7 +310,8 @@ void update(void)
 		if (i.ate)
 		{
 			snake.push_back(snake_Old.back());
-			record.back()+="+\n";
+			record.back()+="+";
+			record.back()+=std::to_string(i.type)+"\n";
 			break;
 		}
 	}

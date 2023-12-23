@@ -18,7 +18,7 @@ static bool configset_create = false;
 static bool replay = false;
 static bool save_record = false;
 char recordname[255];
-char input[255];
+char input[255]="new.rec";
 double level = buff/ speed;          // 游戏速度
 using namespace std; 
 Vector2 mouse;
@@ -114,8 +114,6 @@ int main()
 		}
 		else
 		{
-			buff=5;
-			stepsSinceLastMine=0;
 			BeginDrawing(); // 开始绘制
 			ClearBackground(WHITE); // 清空背景
 			DrawText("score:", 560, 280, 120, BLACK);            
@@ -128,15 +126,23 @@ int main()
 			}
 			if(save_record)
 			{
-				for(auto i:record)
-				{
-					cout << i;
-				}
+			
 				DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
 				int result = GuiTextInputBox((Rectangle){ (float)GetScreenWidth()/2 - 120, (float)GetScreenHeight()/2 - 60, 400, 200 }, "Save", GuiIconText(ICON_FILE_SAVE, "Save file as..."), "Ok;Cancel", input, 255, NULL);
 				if (result == 1)
 				{
 					strcpy(recordname, input);
+					std::string _filerecord = "record/";
+					_filerecord+=recordname;
+					ofstream _record(_filerecord.c_str(),ios::out);
+					for(auto out:record)
+					{
+						_record << out;
+					}
+					_record.close();
+					ofstream recordlist("record/record.list",ios::app);
+					recordlist << recordname << endl;
+					recordlist.close();
 				}
 				if ((result == 0) || (result == 1) || (result == 2))
 				{

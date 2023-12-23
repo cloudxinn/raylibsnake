@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector> 
 #include <cstdlib>
+#include <cstring>
 #include "global_var.h" 
 #include "raygui.h" 
 static std::chrono::steady_clock::time_point timeold;
@@ -15,25 +16,73 @@ static ifstream rec;
 double recordspeed=0;
 void replayrecord()
 {	
-	while (!WindowShouldClose())
+	bool lastpage = false;
+	bool nextpage = false;
+	bool next =false;
+	unsigned next_num = 0;
+	ifstream _recordlist("record/record.list", ios::in);
+	std::vector<std::string> recordlist;
+	while (_recordlist)
 	{
+		std::string temp;
+		_recordlist >> temp;
+		recordlist.push_back(temp);
+	}
+	_recordlist.close();
+	recordlist.pop_back();
+	bool con[recordlist.size()] = {false};
+	
+	while (!next)
+	{	
 		BeginDrawing();
-		
 		ClearBackground(RAYWHITE);
+		recordspeed = GuiSliderBar((Rectangle){200, 920, 300, 60}, "回放速度", TextFormat("%.2f", recordspeed), recordspeed, 0.5, 2.0);
+		DrawText("0.5x--2x", 200, 880, 40, BLACK);
+	
+		// 返回
+		next = GuiButton((Rectangle){800, 920, 680, 80}, "继续") || WindowShouldClose();	
+		// 上一页
+		lastpage = GuiButton((Rectangle){1240, 320, 320, 120}, "上一页") || WindowShouldClose();
+		// 下一页
+		nextpage = GuiButton((Rectangle){1240, 520, 320, 120}, "下一页") || WindowShouldClose();
+		// 绘制列表
 		
-		recordspeed = GuiSliderBar((Rectangle){650, 400, 300, 60}, "回放速度", TextFormat("%.2f", recordspeed), recordspeed, 0.5, 2.0);
-		
-		DrawText("0.5x--2x", 650, 330, 40, BLACK);
-
-		if (GuiButton((Rectangle){650, 500, 120, 40}, "确定"))
+		for (unsigned i = 0; i < recordlist.size(); i++)
 		{
-			break; 
+			con[i] = false;
 		}
-		
+		for (unsigned i = next_num; i < next_num + 5 && i < recordlist.size(); i++)
+		{
+			con[i] = GuiButton((Rectangle){240, (float)200 + (i - next_num) * 120, 880, 120}, recordlist[i].c_str());
+		}
+			
+		// 翻页
+		if (nextpage)
+		{
+			next_num += 5;
+			if (next_num >= recordlist.size())
+				next_num -= 5;
+		}
+			
+		if (lastpage && next_num >= 5)
+		{
+			next_num -= 5;
+		}
+		for (unsigned i = 0; i < recordlist.size(); i++)
+		{
+			if (con[i])
+			{
+				recordlist.push_back(recordlist[i]);
+				next = true;
+				break;
+			}
+		}
 		EndDrawing();
 	}
-	
-	rec.open("record/new.rec", ios::in);
+		
+	std::string _filestring = "record/";
+	_filestring += recordlist.back();
+	rec.open(_filestring.c_str(), ios::in);
 	rec >> configname;
 	std::string config_filestring = "config/";
 	config_filestring += configname;
@@ -90,7 +139,7 @@ void reupdate()
 	int temp[3]{0};
 	apple.clear();
 	mines.clear();
-	
+	int applescore=0;
 	while(tempc!='N')
 	{
 		if(!rec) 
@@ -126,6 +175,8 @@ void reupdate()
 			break;
 		case '+':
 			snake.push_back(snake_Old.back());
+			rec >> applescore;
+			score+=applescore;
 			break;
 		case 'X':
 			return;
