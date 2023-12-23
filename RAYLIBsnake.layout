@@ -1,22 +1,2 @@
 [
-    {
-        "caretX": 10,
-        "caretY": 422,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/config.cpp",
-        "focused": true,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 0,
-        "topLine": 116
-    },
-    {
-        "caretX": 20,
-        "caretY": 121,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/replay.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 1,
-        "topLine": 1
-    }
 ]
