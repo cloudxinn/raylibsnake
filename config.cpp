@@ -448,7 +448,7 @@ bool create_map(void)
 				
 				cli_stream >> x;
 				cli_stream >> y;
-				if (x>=0 && x < _newwidth && y >=0 && y < _newlength) {
+				if (x>0 && x <= _width && y >0 && y <= _length) {
 					gameboard[x-1][y-1]=1;
 				} else {
 					fault();
@@ -460,7 +460,7 @@ bool create_map(void)
 				
 				cli_stream >> x;
 				cli_stream >> y;
-				if (x>=0 && x < _newwidth && y >=0 && y < _newlength && gameboard[x-1][y-1]==1) {
+				if (x>0 && x <= _width && y >0 && y <= _length && gameboard[x-1][y-1]==1) {
 					gameboard[x-1][y-1]=0;
 				} else {
 					fault();
