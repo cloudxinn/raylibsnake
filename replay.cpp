@@ -72,7 +72,7 @@ void replayrecord()
 		{
 			snake_Old.push_back(snake[i]);
 		}
-		
+		level=0.5;
 		if (clock() - now >= 1000 * level)
 		{
 			reupdate();
@@ -127,8 +127,15 @@ void reupdate()
 		case '+':
 			snake.push_back(snake_Old.back());
 			break;
+		case 'X':
+			return;
+			break;
 			default:break;
 		}	
+	}
+	for (unsigned int i = 1; i < snake.size(); i++)
+	{
+		snake[i] = snake_Old[i - 1];
 	}
 	if (snake[0].x > width )
 	{
@@ -149,10 +156,7 @@ void reupdate()
 		snake[0].y = snake[0].y + length;
 	}
 	// 如果蛇头超出屏幕高度范围，（虚墙）将蛇头移到另一侧（实墙）游戏结束
-	for (unsigned int i = 1; i < snake.size(); i++)
-	{
-		snake[i] = snake_Old[i - 1];
-	}
+
 }
 
 

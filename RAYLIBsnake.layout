@@ -1,12 +1,32 @@
 [
     {
-        "caretX": 11,
-        "caretY": 119,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/in_game.cpp",
-        "focused": true,
+        "caretX": 2,
+        "caretY": 23,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/font.cpp",
+        "focused": false,
         "isOpen": true,
         "leftChar": 1,
-        "order": 8,
+        "order": 0,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 15,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/structs.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 3,
+        "topLine": 4
+    },
+    {
+        "caretX": 12,
+        "caretY": 130,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/replay.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 7,
         "topLine": 100
     },
     {
@@ -21,23 +41,33 @@
     },
     {
         "caretX": 2,
-        "caretY": 23,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/font.cpp",
+        "caretY": 350,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/in_game.cpp",
+        "focused": true,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 8,
+        "topLine": 265
+    },
+    {
+        "caretX": 60,
+        "caretY": 11,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/end_game.cpp",
         "focused": false,
         "isOpen": true,
         "leftChar": 1,
-        "order": 0,
+        "order": 4,
         "topLine": 1
     },
     {
-        "caretX": 1,
-        "caretY": 134,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/replay.cpp",
+        "caretX": 24,
+        "caretY": 75,
+        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/config.cpp",
         "focused": false,
         "isOpen": true,
         "leftChar": 1,
-        "order": 7,
-        "topLine": 100
+        "order": 6,
+        "topLine": 10
     },
     {
         "caretX": 18,
@@ -58,35 +88,5 @@
         "leftChar": 1,
         "order": 1,
         "topLine": 82
-    },
-    {
-        "caretX": 60,
-        "caretY": 11,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/end_game.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 4,
-        "topLine": 1
-    },
-    {
-        "caretX": 1,
-        "caretY": 15,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/structs.h",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 3,
-        "topLine": 4
-    },
-    {
-        "caretX": 24,
-        "caretY": 75,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/config.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 6,
-        "topLine": 10
     }
 ]

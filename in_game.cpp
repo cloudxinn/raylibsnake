@@ -234,7 +234,16 @@ void update(void)
 		record.back()+='\n';
 		break;
 	}
-	
+	for(unsigned i = 0;i<apple.size();i++)
+	{
+		record.back()+="F ";
+		record.back()+=std::to_string(apple[i].x);
+		record.back()+=' ';
+		record.back()+=std::to_string(apple[i].y);
+		record.back()+=' ';
+		record.back()+=std::to_string(apple[i].type);
+		record.back()+='\n';
+	}
 	
 	stepsSinceLastMine++;
 	if (stepsSinceLastMine > 15) {
@@ -301,7 +310,6 @@ void update(void)
 		if (i.ate)
 		{
 			snake.push_back(snake_Old.back());
-			i.ate = false;
 			record.back()+="+\n";
 			break;
 		}
@@ -330,16 +338,7 @@ void update(void)
 	}
 	
 	// 更新苹果位置
-	for(unsigned i = 0;i<apple.size();i++)
-	{
-		record.back()+="F ";
-		record.back()+=std::to_string(apple[i].x);
-		record.back()+=' ';
-		record.back()+=std::to_string(apple[i].y);
-		record.back()+=' ';
-		record.back()+=std::to_string(apple[i].type);
-		record.back()+='\n';
-	}
+	if(gameover) record.back()+="X\n";
 	record.back()+="N\n";
 	return;
 }
