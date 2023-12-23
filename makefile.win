@@ -4,9 +4,9 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = font.o replay.o begin_game.o in_game.o end_game.o config.o main.o
-LINKOBJ  = font.o replay.o begin_game.o in_game.o end_game.o config.o main.o
-CLEANOBJ  =  font.o replay.o begin_game.o in_game.o end_game.o config.o main.o RAYLIBsnake.exe
+OBJ      = replay.o in_game.o end_game.o begin_game.o config.o main.o font.o
+LINKOBJ  = replay.o in_game.o end_game.o begin_game.o config.o main.o font.o
+CLEANOBJ  =  replay.o in_game.o end_game.o begin_game.o config.o main.o font.o RAYLIBsnake.exe
 LIBS     =  -lraylib -lopengl32 -lgdi32 -lwinmm
 INCS     =  
 CXXINCS  =  
@@ -26,23 +26,23 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-font.o: font.cpp structs.h global_var.h
-	$(CPP) -c font.cpp -o font.o $(CXXFLAGS) 
-
-replay.o: replay.cpp structs.h global_var.h
+replay.o: replay.cpp global_var.h structs.h
 	$(CPP) -c replay.cpp -o replay.o $(CXXFLAGS) 
 
-begin_game.o: begin_game.cpp structs.h global_var.h
-	$(CPP) -c begin_game.cpp -o begin_game.o $(CXXFLAGS) 
-
-in_game.o: in_game.cpp structs.h global_var.h
+in_game.o: in_game.cpp global_var.h structs.h
 	$(CPP) -c in_game.cpp -o in_game.o $(CXXFLAGS) 
 
-end_game.o: end_game.cpp structs.h global_var.h
+end_game.o: end_game.cpp global_var.h structs.h
 	$(CPP) -c end_game.cpp -o end_game.o $(CXXFLAGS) 
 
-config.o: config.cpp structs.h global_var.h
+begin_game.o: begin_game.cpp global_var.h structs.h
+	$(CPP) -c begin_game.cpp -o begin_game.o $(CXXFLAGS) 
+
+config.o: config.cpp global_var.h structs.h
 	$(CPP) -c config.cpp -o config.o $(CXXFLAGS) 
 
-main.o: main.cpp structs.h global_var.h
+main.o: main.cpp global_var.h structs.h
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS) 
+
+font.o: font.cpp global_var.h structs.h
+	$(CPP) -c font.cpp -o font.o $(CXXFLAGS) 

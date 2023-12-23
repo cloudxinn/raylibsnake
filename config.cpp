@@ -61,7 +61,7 @@ bool setmap(void)
 	bool exit = false;
 	
 	
-	ifstream _maplist("res/maps.list", ios::in);
+	ifstream _maplist("maps/maps.list", ios::in);
 	std::vector<std::string> maplist;
 	while (_maplist)
 	{
@@ -157,7 +157,7 @@ bool setconfig(void)
 {
 	bool exit = false;
 
-	ifstream _configlist("res/configs.list", ios::in);
+	ifstream _configlist("config/configs.list", ios::in);
 	std::vector<std::string> configlist;
 	while (_configlist)
 	{
