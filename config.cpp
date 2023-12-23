@@ -9,6 +9,7 @@
 #include <array>
 #include <string>
 #include <cstring>
+#include <sstream>
 
 using std::ofstream;
 using std::ifstream;
@@ -30,6 +31,8 @@ int fruit_num = 5;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
 std::vector<position> obstacletemp;
 char mapname[256] = "new.map";
+char inputs[256] = "new.map";
+std::stringstream cli_stream;
 string mapnamestring;
 bool maptextBoxEditMode = false;
 bool maptextBox0EditMode = false;
@@ -363,7 +366,8 @@ bool create_map(void)
 	int _width = 15;
 	int _length = 15;
 	wallstatue.fill(true);
-	
+	char ctemp;
+	int itemp[3];
 	Vector2 mouse;
 	
 	// 初始化游戏板
@@ -401,9 +405,50 @@ bool create_map(void)
 		wallstatue[2] = GuiCheckBox((Rectangle){ 520, 1080, 100, 100 }, "左", wallstatue[2]);
 		wallstatue[3] = GuiCheckBox((Rectangle){ 720, 1080, 100, 100 }, "右", wallstatue[3]);
 		
-		if (GuiTextBox((Rectangle){1040, 520, 520, 120}, mapname, 120, maptextBoxEditMode))
+		if (GuiTextBox((Rectangle){1040, 520, 520, 120}, inputs, 120, maptextBoxEditMode))
 			maptextBoxEditMode = !maptextBoxEditMode;
 		
+		if(IsKeyPressed(KEY_ENTER))
+		{
+			cli_stream.clear();
+			cli_stream << inputs;
+			strcpy(inputs,"\0");
+			cli_stream >> ctemp;
+			switch (ctemp) 
+			{
+			case 'n':
+				cli_stream >> itemp[0];
+				cli_stream >> itemp[1];
+				if(itemp[0]>7&&itemp[0]<21&&itemp[1]>7&&itemp[1]<21)
+				{
+					_newwidth = itemp[0];
+					_newlength = itemp[1];
+				}
+				break;
+			case 'o':
+				//TODO
+				break;
+			case 'p':
+				//TODO
+				break;
+			case 'w':
+				//TODO
+				break;
+			case 'a':
+				//TODO
+				break;
+			case 's':
+				//TODO
+				break;
+			case 'd':
+				//TODO
+				break;
+			default:
+				//TODO
+				break;
+			}
+		}
+		strcpy(mapname,inputs);
 		mapnamestring = mapname;
 		
 		// 绘制地图

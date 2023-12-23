@@ -38,9 +38,8 @@ void replayrecord()
 		ClearBackground(RAYWHITE);
 		recordspeed = GuiSliderBar((Rectangle){200, 920, 300, 60}, "回放速度", TextFormat("%.2f", recordspeed), recordspeed, 0.5, 2.0);
 		DrawText("0.5x--2x", 200, 880, 40, BLACK);
-	
-		// 返回
 		next = GuiButton((Rectangle){800, 920, 680, 80}, "继续") || WindowShouldClose();	
+		if(next) break;
 		// 上一页
 		lastpage = GuiButton((Rectangle){1240, 320, 320, 120}, "上一页") || WindowShouldClose();
 		// 下一页
