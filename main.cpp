@@ -114,6 +114,8 @@ int main()
 		}
 		else
 		{
+			buff=5;
+			stepsSinceLastMine=0;
 			BeginDrawing(); // 开始绘制
 			ClearBackground(WHITE); // 清空背景
 			DrawText("score:", 560, 280, 120, BLACK);            
