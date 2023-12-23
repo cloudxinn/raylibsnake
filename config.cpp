@@ -31,7 +31,7 @@ int fruit_num = 5;
 int furit_pro[3] = {6, 3, 1}; // 10 points express probability
 std::vector<position> obstacletemp;
 char mapname[256] = "new.map";
-char inputs[256] = "new.map";
+char inputs[256] = "";
 std::stringstream cli_stream;
 string mapnamestring;
 bool maptextBoxEditMode = false;
@@ -53,12 +53,27 @@ array<bool,4> wallstatue;
 
 
 void DrawStyleEditControls(void);
+
 bool setmap(void);
 bool setconfig(void);
 bool create_config(void);
 bool create_map(void);
-
-
+void fault(){
+	bool msg_box=true;
+	while (msg_box)
+	{
+		BeginDrawing();
+		ClearBackground(WHITE);	
+		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
+		int result = GuiMessageBox((Rectangle){ (float)GetScreenWidth()/2 - 200, (float)GetScreenHeight()/2 - 200, 640, 200 }, GuiIconText(ICON_CPU, "ERROR"), "非法输入", "返回");	
+		if ((result == 1) || (result == 0)) msg_box = false;
+		if(!msg_box)
+		{
+			setfont("res/font.ttf", 50);
+		}
+		EndDrawing();
+	}
+}
 // 设置地图函数
 bool setmap(void)
 {
@@ -394,6 +409,7 @@ bool create_map(void)
 		save = GuiButton((Rectangle){1160, 760, 360, 160}, "保存") || WindowShouldClose();
 		
 		// 绘制界面
+		DrawTextEx(font,"命令行", (Vector2){1040, 650}, 80, 5, BLACK);
 		DrawTextEx(font, "地图大小：", (Vector2){1040, 120}, 80, 5, BLACK);
 		DrawTextEx(font, "墙虚实：", (Vector2){0, 1000}, 80, 5, BLACK);
 		int _newwidth = GuiSliderBar((Rectangle){1160, 200, 400, 120}, "横：", TextFormat("%i", (int)_width), _width, 8, 20);
@@ -414,37 +430,80 @@ bool create_map(void)
 			cli_stream << inputs;
 			strcpy(inputs,"\0");
 			cli_stream >> ctemp;
+			int x,y;
 			switch (ctemp) 
 			{
 			case 'n':
 				cli_stream >> itemp[0];
 				cli_stream >> itemp[1];
-				if(itemp[0]>7&&itemp[0]<21&&itemp[1]>7&&itemp[1]<21)
-				{
+				if (itemp[0] > 7 && itemp[0] < 21 && itemp[1] > 7 && itemp[1] < 21) {
 					_newwidth = itemp[0];
 					_newlength = itemp[1];
+				} else {
+					fault();
 				}
 				break;
+
 			case 'o':
-				//TODO
+				
+				cli_stream >> x;
+				cli_stream >> y;
+				if (x>=0 && x < _newwidth && y >=0 && y < _newlength) {
+					gameboard[x-1][y-1]=1;
+				} else {
+					fault();
+				}
 				break;
+				
+				
 			case 'p':
-				//TODO
+				
+				cli_stream >> x;
+				cli_stream >> y;
+				if (x>=0 && x < _newwidth && y >=0 && y < _newlength && gameboard[x-1][y-1]==1) {
+					gameboard[x-1][y-1]=0;
+				} else {
+					fault();
+				}
 				break;
 			case 'w':
-				//TODO
+				cli_stream >> x;
+				if(x==0||x==1){
+				wallstatue[0]=x;
+				}
+				else{
+					fault();
+				}
 				break;
 			case 'a':
-				//TODO
+				cli_stream >> x;
+				if(x==0||x==1){
+					wallstatue[2]=x;
+				}
+				else{
+					fault();
+				}
 				break;
 			case 's':
-				//TODO
+				cli_stream >> x;
+				if(x==0||x==1){
+					wallstatue[1]=x;
+				}
+				else{
+					fault();
+				}
 				break;
 			case 'd':
-				//TODO
+				cli_stream >> x;
+				if(x==0||x==1){
+					wallstatue[3]=x;
+				}
+				else{
+					fault();
+				}
 				break;
 			default:
-				//TODO
+				fault();
 				break;
 			}
 		}
@@ -556,4 +615,3 @@ bool create_map(void)
 	}
 	return true;
 }
-
