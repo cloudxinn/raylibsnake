@@ -26,7 +26,7 @@ Vector2 mouse;
 Image imgsnake_body = LoadImage("res/snake_body.png");
 Image imgsnake_head = LoadImage("res/snake_head.png");
 Image imgwall = LoadImage("res/wall.png");
-Image imgapple[3] = {LoadImage("res/apple_1.png"),LoadImage("res/apple_1.png"),LoadImage("res/apple_2.png")};
+Image imgapple[3] = {LoadImage("res/apple_0.png"),LoadImage("res/apple_1.png"),LoadImage("res/apple_2.png")};
 Image imgmine[3] = {LoadImage("res/mine.png"),LoadImage("res/mine2.png"),LoadImage("res/mine3.png")};
 Texture twall;
 Texture tbody;
