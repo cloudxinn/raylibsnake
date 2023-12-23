@@ -355,9 +355,19 @@ position rand_position()
 _apple rand_apple()
 {
 	position temp = rand_position();
-	int type=0;
-	type = rand()%3;
-	return _apple{temp.x,temp.y,type,true};
+	int type = 0;
+	srand(time(0));
+	int randomValue = rand() % 10;
+	
+	if (randomValue < _applepro[0]) {
+		type = 0;
+	} else if (randomValue < _applepro[0] + _applepro[1]) {
+		type = 1;
+	} else {
+		type = 2;
+	}
+	
+	return _apple{temp.x, temp.y, type, true};
 }
 void pause_game(void)
 {
