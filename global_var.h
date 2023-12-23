@@ -15,7 +15,7 @@ extern std::vector<position> obstacle;
 extern std::vector<position> obstacletemp;
 extern std::vector<_apple> apple;
 extern std::array<bool,4> wallstatue;
-
+extern int _applepro[3];
 extern Texture twall;
 extern Texture tbody;
 extern Texture thead;
