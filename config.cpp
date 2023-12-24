@@ -413,8 +413,8 @@ bool create_map(void)
 		DrawTextEx(font,"命令行", (Vector2){1040, 650}, 80, 5, BLACK);
 		DrawTextEx(font, "地图大小：", (Vector2){1040, 120}, 80, 5, BLACK);
 		DrawTextEx(font, "墙虚实：", (Vector2){0, 1000}, 80, 5, BLACK);
-		int _newwidth = GuiSliderBar((Rectangle){1160, 200, 400, 120}, "横：", TextFormat("%i", (int)_width), _width, 8, 20);
-		int _newlength = GuiSliderBar((Rectangle){1160, 360, 400, 120}, "纵：", TextFormat("%i", (int)_length), _length, 8, 20);
+		int _newwidth = GuiSliderBar((Rectangle){1120, 200, 400, 120}, "横：", TextFormat("%i", (int)_width), _width, 8, 20);
+		int _newlength = GuiSliderBar((Rectangle){1120, 360, 400, 120}, "纵：", TextFormat("%i", (int)_length), _length, 8, 20);
 		
 		//绘制勾选框（墙壁虚实）
 		wallstatue[0] = GuiCheckBox((Rectangle){ 120, 1080, 100, 100 }, "上", wallstatue[0]);
