@@ -8,7 +8,7 @@ int *codepoints;
 Font font;
 void setfont(const char *fileName, const int fontSize)
 {
-	char guitests[1500] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM分墙虚命令行这儿!是实开始非法输入游戏暂停继续放地图设置配创建返回上一页下左右大小保存纵横难度种子食物数量-生成概率:：；.1234567890确定回放速度";
+	char guitests[1500] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM分墙虚命令行再来一次保存是实开始非法输入游戏暂停继续放地图设置配创建返回上一页下左右大小保存纵横难度种子食物数量-生成概率:：；.1234567890确定回放速度";
 	
 	// 将字符串中的字符逐一转换成Unicode码点，得到码点表
 	codepoints = LoadCodepoints(guitests, &codepointsCount);

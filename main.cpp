@@ -117,8 +117,8 @@ int main()
 			ClearBackground(WHITE); // 清空背景
 			DrawText("score:", 560, 280, 120, BLACK);            
 			DrawText(std::to_string(score).c_str(), 600, 520, 160, BLACK); // 绘制得分
-			gameover = !GuiButton((Rectangle){520, 760, 560, 200}, "Once Again");
-			if(GuiButton((Rectangle){520, 960, 560, 200}, GuiIconText(ICON_FILE_SAVE, "Save File"))) 
+			gameover = !GuiButton((Rectangle){520, 760, 560, 200}, "再来一次");
+			if(GuiButton((Rectangle){520, 960, 560, 200}, GuiIconText(ICON_FILE_SAVE, "保存回放"))) 
 			{
 				save_record = true;
 				setfont("res/font.ttf", 30);
