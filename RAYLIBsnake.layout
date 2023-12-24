@@ -1,2 +1,76 @@
 [
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/end_game.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 16,
+        "caretY": 1,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/in_game.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 0,
+        "topLine": 1
+    },
+    {
+        "caretX": 9,
+        "caretY": 102,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/main.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 88
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/font.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/config.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 20,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/begin_game.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 4
+    },
+    {
+        "caretX": 17,
+        "caretY": 8,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/global_var.h",
+        "focused": true,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/replay.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    }
 ]

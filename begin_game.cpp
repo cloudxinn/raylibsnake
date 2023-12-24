@@ -18,8 +18,6 @@ double buff=5;
 int move = 0;
 std::vector<std::string> record;
 
-
-
 void begin_game(int m, int n)
 { 
 	//清空历史信息
@@ -67,8 +65,6 @@ void begin_game(int m, int n)
 		apple[i].ate = false;
 		
 	}
-	
-	
 	srand((seed==-1?time(NULL):seed));
 	level = buff/ speed;
 	//记录配置和地图
