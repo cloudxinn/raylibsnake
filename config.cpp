@@ -371,6 +371,7 @@ bool create_config(void)
 			}
 		}
 	}
+	return true;
 }
 
 // 创建地图

@@ -96,12 +96,11 @@ int main()
 			return 0;
 		}
 	}
-	
 	UnloadImage(bg);    // 卸载标题
 	UnloadTexture(tbg);
+
 	
 	begin_game(width + 2, length + 2); // 游戏初始化
-	cout << width << endl << length;
 	now = clock();
 	// 主循环
 	while (!WindowShouldClose())
@@ -158,8 +157,7 @@ int main()
 			EndDrawing(); // 结束绘制
 		}
 	}
-	UnloadFont(font); 
-	// end_game()
+
 	UnloadImage(imgsnake_body);
 	UnloadImage(imgsnake_head);
 	UnloadImage(imgwall);
@@ -173,5 +171,6 @@ int main()
 	UnloadTexture(twall);
 	UnloadTexture(tbody);
 	UnloadTexture(thead);
+	UnloadFont(font); 
 	return 0;
 }
