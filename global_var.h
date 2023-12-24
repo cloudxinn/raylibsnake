@@ -42,7 +42,7 @@ extern clock_t now;
 
 extern char mapname[256];
 extern char configname[256];
-
+extern char name[256];
 extern double speed;
 extern char _seed[50];
 extern int fruit_num;
