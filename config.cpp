@@ -40,7 +40,7 @@ bool maptextBox1EditMode = false;
 bool maptextBox2EditMode = false;
 bool maptextBox3EditMode = false;
 bool maptextBox4EditMode = false;
-
+char name[256]="new.map";
 char configname[256] = "new.config";
 string confignamestring;
 bool configtextBoxEditMode = false;
@@ -371,7 +371,6 @@ bool create_config(void)
 			}
 		}
 	}
-	return true;
 }
 
 // 创建地图
@@ -444,7 +443,6 @@ bool create_map(void)
 					fault();
 				}
 				break;
-
 			case 'o':
 				
 				cli_stream >> x;
@@ -508,9 +506,7 @@ bool create_map(void)
 				break;
 			}
 		}
-		strcpy(mapname,inputs);
-		mapnamestring = mapname;
-		
+				
 		// 绘制地图
 		for (int i = 0; i < _width + 1; i++)
 		{
@@ -574,6 +570,30 @@ bool create_map(void)
 		// 保存
 		if (save)
 		{
+			int ex = 0;
+			maptextBoxEditMode=false;
+			while (!ex) {
+				BeginDrawing();
+				
+				// 在主循环外调用 GuiTextBox
+				DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
+				
+				if (GuiTextBox((Rectangle){500, 520, 520, 120}, name, 120, maptextBoxEditMode)){
+					maptextBoxEditMode = !maptextBoxEditMode;
+				}
+				
+				
+				EndDrawing();
+				
+				// 处理用户输入和逻辑
+				if (IsKeyPressed(KEY_ENTER)) {
+					strcpy(mapname, name);
+					ex = 1;
+				}
+			}
+
+			
+			mapnamestring = mapname;
 			std::ofstream mapmenu("res/maps.list", ios::app);
 			mapmenu << endl <<mapnamestring;
 			mapnamestring = "maps/" + mapnamestring;
