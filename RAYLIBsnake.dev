@@ -44,16 +44,16 @@ UseUTF8 = 1
 
 
 [Unit1]
-FileName = res/wall.png
+FileName = end_game.cpp
 CompileCpp = 1
-Folder = 其他文件/res
-Compile = 0
-Link = 0
+Folder = 源文件
+Compile = 1
+Link = 1
 Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
 FileEncoding = PROJECT
-RealEncoding = ASCII
+RealEncoding = UTF-8
 
 
 [VersionInfo]
@@ -77,7 +77,7 @@ SyncProduct = 1
 
 
 [Unit2]
-FileName = res/snake_head.png
+FileName = res/wall.png
 Folder = 其他文件/res
 Compile = 0
 Link = 0
@@ -103,7 +103,7 @@ CompileCpp = 0
 
 
 [Unit4]
-FileName = in_game.cpp
+FileName = begin_game.cpp
 Folder = 源文件
 Compile = 1
 Link = 1
@@ -116,6 +116,19 @@ CompileCpp = 1
 
 
 [Unit5]
+FileName = structs.h
+Folder = 头文件
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = UTF-8
+CompileCpp = 0
+
+
+[Unit6]
 FileName = main.cpp
 Folder = 源文件
 Compile = 1
@@ -128,21 +141,8 @@ RealEncoding = UTF-8
 CompileCpp = 1
 
 
-[Unit6]
-FileName = res/tittle.png
-Folder = 其他文件/res
-Compile = 0
-Link = 0
-Priority = 1000
-OverrideBuildCmd = 0
-BuildCmd = 
-FileEncoding = PROJECT
-RealEncoding = ASCII
-CompileCpp = 1
-
-
 [Unit7]
-FileName = end_game.cpp
+FileName = font.cpp
 Folder = 源文件
 Compile = 1
 Link = 1
@@ -155,7 +155,7 @@ CompileCpp = 1
 
 
 [Unit8]
-FileName = replay.cpp
+FileName = config.cpp
 Folder = 源文件
 Compile = 1
 Link = 1
@@ -168,7 +168,7 @@ CompileCpp = 1
 
 
 [Unit9]
-FileName = font.cpp
+FileName = in_game.cpp
 CompileCpp = 1
 Folder = 源文件
 Compile = 1
@@ -181,37 +181,37 @@ RealEncoding = UTF-8
 
 
 [Unit10]
-FileName = global_var.h
+FileName = res/snake_head.png
 CompileCpp = 0
-Folder = 头文件
+Folder = 其他文件/res
 Compile = 0
 Link = 0
 Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
 FileEncoding = PROJECT
-RealEncoding = UTF-8
+RealEncoding = ASCII
 
 
 [Unit11]
-FileName = begin_game.cpp
+FileName = res/tittle.png
+CompileCpp = 1
+Folder = 其他文件/res
+Compile = 0
+Link = 0
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+FileEncoding = PROJECT
+RealEncoding = ASCII
+
+
+[Unit12]
+FileName = replay.cpp
 CompileCpp = 1
 Folder = 源文件
 Compile = 1
 Link = 1
-Priority = 1000
-OverrideBuildCmd = 0
-BuildCmd = 
-FileEncoding = PROJECT
-RealEncoding = UTF-8
-
-
-[Unit12]
-FileName = structs.h
-CompileCpp = 0
-Folder = 头文件
-Compile = 0
-Link = 0
 Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
@@ -220,16 +220,16 @@ RealEncoding = UTF-8
 
 
 [Unit13]
-FileName = config.cpp
-Folder = 源文件
-Compile = 1
-Link = 1
+FileName = global_var.h
+Folder = 头文件
+Compile = 0
+Link = 0
 Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
 FileEncoding = PROJECT
 RealEncoding = UTF-8
-CompileCpp = 1
+CompileCpp = 0
 
 
 [Unit14]

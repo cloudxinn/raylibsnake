@@ -1,32 +1,12 @@
 [
     {
         "caretX": 14,
-        "caretY": 8,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/in_game.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 1,
-        "topLine": 8
-    },
-    {
-        "caretX": 60,
-        "caretY": 120,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/main.cpp",
-        "focused": false,
-        "isOpen": true,
-        "leftChar": 1,
-        "order": 2,
-        "topLine": 106
-    },
-    {
-        "caretX": 13,
-        "caretY": 14,
-        "filename": "C:/Users/Laptop/Desktop/study/BHW/RAYLIBsnake/font.cpp",
+        "caretY": 374,
+        "filename": "C:/Users/Laptop/Documents/GitHub/raylibsnake/config.cpp",
         "focused": true,
         "isOpen": true,
         "leftChar": 1,
         "order": 0,
-        "topLine": 1
+        "topLine": 358
     }
 ]

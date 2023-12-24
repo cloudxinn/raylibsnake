@@ -357,7 +357,7 @@ bool create_config(void)
 				_seed[1]='1';
 				_seed[2]='\0';
 			}
-			std::ofstream configmenu("res/configs.list", ios::app);
+			std::ofstream configmenu("config/configs.list", ios::app);
 			configmenu << endl <<confignamestring;
 			confignamestring = "config/" + confignamestring;
 			std::ofstream outconfig(confignamestring.c_str(), ios::out);
@@ -371,6 +371,7 @@ bool create_config(void)
 			}
 		}
 	}
+	return true;
 }
 
 // 创建地图
@@ -594,7 +595,7 @@ bool create_map(void)
 
 			
 			mapnamestring = mapname;
-			std::ofstream mapmenu("res/maps.list", ios::app);
+			std::ofstream mapmenu("maps/maps.list", ios::app);
 			mapmenu << endl <<mapnamestring;
 			mapnamestring = "maps/" + mapnamestring;
 			std::ofstream outmap(mapnamestring.c_str(), ios::out);
